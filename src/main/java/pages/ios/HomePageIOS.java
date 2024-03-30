@@ -3,7 +3,7 @@ package pages.ios;
 import org.openqa.selenium.By;
 import pages.base.HomePageBase;
 
-import static gobal_constants.constants.EMPTY_STRING;
+import static gobalconstants.constants.EMPTY_STRING;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class HomePageIOS extends HomePageBase {
@@ -22,6 +22,7 @@ public class HomePageIOS extends HomePageBase {
     private final String myCash = EMPTY_STRING;
     private final String myBiz = EMPTY_STRING;
     private final String searchIcon = EMPTY_STRING;
+    private final String searchBar = EMPTY_STRING;
     private final String logo = EMPTY_STRING;
     private final String header = EMPTY_STRING;
     private final String subHeader = EMPTY_STRING;
@@ -48,7 +49,7 @@ public class HomePageIOS extends HomePageBase {
     }
 
     @Override
-    public By languageSelectionSkipButton() {
+    public By getLanguageSelectionSkipButton() {
         return By.id(languageSkipButton);
     }
 
@@ -110,6 +111,61 @@ public class HomePageIOS extends HomePageBase {
     @Override
     public By getSearchIcon() {
         return By.xpath(searchIcon);
+    }
+
+    @Override
+    public By getSearchBar() {
+        return By.id(searchBar);
+    }
+
+    @Override
+    public By getMenuDrawer() {
+        return null;
+    }
+
+    @Override
+    public By getLoginSignUpButton() {
+        return null;
+    }
+
+    @Override
+    public By getPrimaryItemsInMenuDrawer() {
+        return null;
+    }
+
+    @Override
+    public By getMyTripsSection() {
+        return null;
+    }
+
+    @Override
+    public By getMyTripsItems() {
+        return null;
+    }
+
+    @Override
+    public By getRewardsSection() {
+        return null;
+    }
+
+    @Override
+    public By getRewardsItems() {
+        return null;
+    }
+
+    @Override
+    public By getSettingsSection() {
+        return null;
+    }
+
+    @Override
+    public By getSettingsItems() {
+        return null;
+    }
+
+    @Override
+    public By getMenuDrawerBottomLinks(String itemText) {
+        return null;
     }
 
     @Override

@@ -2,14 +2,15 @@
 Feature: MakeMyTrip Home Page Tests
 
   Background: User is on MakeMyTrip Home Page
-    Given User closes Login Popup and Ads if any
+    Given User skips language selection and login screen
+    And User closes Login Popup and Ads if any
 
   Scenario: Home Page UI Validations
     Then User should see the Hamburger Menu Icon at top left
     And Logo should be displayed right to the Hamburger Menu Icon at top left
     And MyBiz button should be displayed at the top right
     And MyCash button should be displayed left to MyBiz
-    And Search Icon should be displayed left to MyCash
+    And Search Bar should be displayed
 
   Scenario: Home Page - Navigation Bar validations
     Then User is able to see the Nav Bar

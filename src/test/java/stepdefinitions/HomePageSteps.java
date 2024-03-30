@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import pages.pageobjects.HomePage;
@@ -15,6 +16,12 @@ public class HomePageSteps {
     public void userClosesLoginPopupAndAdsIfAny() {
         homePage.closeLoginPopUp();
         homePage.closeAdsIfAny();
+    }
+
+    @Given("User skips language selection and login screen")
+    public void userSkipsLanguageSelectionAndLoginScreen() {
+        homePage.skipLanguageSelection();
+        homePage.skipInitialLoginScreen();
     }
 
     @Then("User should see the Hamburger Menu Icon at top left")
@@ -37,8 +44,8 @@ public class HomePageSteps {
         Assert.assertTrue(homePage.isMyCashDisplayed());
     }
 
-    @And("Search Icon should be displayed left to MyCash")
-    public void searchIconShouldBeDisplayedLeftToMyCash() {
+    @And("Search Icon/Bar should be displayed")
+    public void searchIconShouldBeDisplayed() {
         Assert.assertTrue(homePage.isSearchIconDisplayed());
     }
 

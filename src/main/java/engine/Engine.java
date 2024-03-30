@@ -31,7 +31,7 @@ public class Engine {
 
     public static URL startAppiumServer() {
         AppiumServiceBuilder builder = new AppiumServiceBuilder()
-                .withIPAddress("127.0.0.1")
+                .withIPAddress(getProperties().getProperty("appium.server.url.local"))
                 .usingAnyFreePort();
 
         // Start the Appium server
@@ -71,9 +71,7 @@ public class Engine {
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(properties.getProperty("implicit.wait"))));
         Log.info("Driver Started....");
-        waitFor(Duration.ofSeconds(2));
-        activateApp();
-        waitFor(Duration.ofSeconds(2));
+        //activateApp();
         tlDriver.set(driver);
     }
 
@@ -98,14 +96,10 @@ public class Engine {
 
     public static void activateApp() {
         AppiumDriver driver = tlDriver.get();
-        if (driver instanceof AndroidDriver androidDriver) {
-            String currentPackage = androidDriver.currentActivity();
-            if (currentPackage == null || !currentPackage.equals(appPackage)) {
-                androidDriver.activateApp(appPackage);
-                Log.info("App Activated...");
-            } else {
-                Log.info("App is already active.");
-            }
+        if (isAndroid()) {
+            ((AndroidDriver) driver).activateApp(appPackage);
+            Log.info("App Activated...");
+            waitFor(Duration.ofSeconds(2));
         } else {
             Log.error("This method is only applicable for AndroidDriver.");
         }
@@ -128,7 +122,7 @@ public class Engine {
         capabilities.setCapability("platformVersion", androidProperties.getProperty("platform.version"));
         capabilities.setCapability("automationName", "uiAutomator2");
         capabilities.setCapability("appPackage", appPackage);
-        //capabilities.setCapability("appActivity", androidProperties.getProperty("app.activity"));
+        capabilities.setCapability("appActivity", androidProperties.getProperty("app.activity"));
         capabilities.setCapability("app", androidProperties.getProperty("app"));
         capabilities.setCapability("noReset", Boolean.parseBoolean(androidProperties.getProperty("no.reset"))); // Do not reset app state before this session
         capabilities.setCapability("autoGrantPermissions", Boolean.parseBoolean(androidProperties.getProperty("auto.grant.permissions"))); // Automatically grant permissions
@@ -148,7 +142,7 @@ public class Engine {
         capabilities.setCapability("platformVersion", iosProperties.getProperty("platform.version"));
         capabilities.setCapability("automationName", "xcuitest");
         capabilities.setCapability("appPackage", appPackage);
-        //capabilities.setCapability("appActivity", iosProperties.getProperty("app.activity"));
+        capabilities.setCapability("appActivity", iosProperties.getProperty("app.activity"));
         capabilities.setCapability("app", iosProperties.getProperty("app"));
         capabilities.setCapability("noReset", Boolean.parseBoolean(iosProperties.getProperty("no.reset"))); // Do not reset app state before this session
         capabilities.setCapability("autoGrantPermissions", Boolean.parseBoolean(iosProperties.getProperty("auto.grant.permissions"))); // Automatically grant permissions

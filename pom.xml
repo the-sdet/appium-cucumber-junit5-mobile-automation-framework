@@ -18,7 +18,7 @@
         <playwright.version>1.31.0</playwright.version>
         <appium.version>9.1.0</appium.version>
         <cucumber.version>7.15.0</cucumber.version>
-        <automation.utils.version>1.2.1</automation.utils.version>
+        <automation.utils.version>1.2.3</automation.utils.version>
         <google.json.version>1.1.1</google.json.version>
         <guava.version>33.0.0-jre</guava.version>
         <junit.platform.suite.version>1.9.2</junit.platform.suite.version>
@@ -45,6 +45,10 @@
         <execution.type>local</execution.type>
         <platform>android</platform>
         <env>qa</env>
+
+        <sauce.url>dummy_url</sauce.url>
+        <sauce.username>dummy_user</sauce.username>
+        <sauce.password>dummy_password</sauce.password>
 
         <runner.path>**/TestRunner.class</runner.path>
         <parallel>false</parallel>

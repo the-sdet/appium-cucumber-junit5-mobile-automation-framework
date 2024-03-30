@@ -3,7 +3,7 @@ package pages.ios;
 import org.openqa.selenium.By;
 import pages.base.FlightsPageBase;
 
-import static gobal_constants.constants.EMPTY_STRING;
+import static gobalconstants.constants.EMPTY_STRING;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class FlightsPageIOS extends FlightsPageBase {
