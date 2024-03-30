@@ -4,8 +4,7 @@ import io.cucumber.java.*;
 import logger.Log;
 
 import static engine.Engine.*;
-import static utils.CucumberUtils.attachScreenshot;
-import static utils.CucumberUtils.setCurrentScenario;
+import static io.github.the_sdet.cucumber.CucumberUtils.*;
 
 @SuppressWarnings("unused")
 public class Hooks {
@@ -17,13 +16,16 @@ public class Hooks {
     @Before
     public void beforeTest(Scenario scenario) {
         setCurrentScenario(scenario);
-        Log.info("This is before test...");
+        logToReport(scenario.getName() + " Started...");
     }
 
     @After
     public void afterTest(Scenario scenario) {
-        Log.info("This is after test...");
-        attachScreenshot();
+        if (scenario.isFailed())
+            logFailureToReport(scenario.getName() + " Completed...");
+        else
+            logSuccessToReport(scenario.getName() + " Completed...");
+        attachScreenshot(getDriver(), scenario.getName());
     }
 
     @AfterAll

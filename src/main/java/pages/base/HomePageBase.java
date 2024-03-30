@@ -9,11 +9,23 @@ public abstract class HomePageBase {
 
     public abstract By getContinueButton();
 
+    public abstract By languageSelectionSkipButton();
+
+    public abstract By getLoginScreen();
+
+    public abstract By getDismissButton();
+
     public abstract By getCompleteActionUsingDevicePopUp();
 
     public abstract By getContinueWithEmail();
 
     public abstract By getCloseLoginAlert();
+
+    public abstract By getAdBar();
+
+    public abstract By getAdBarCloseButton();
+
+    public abstract By getAdContent();
 
     public abstract By getDrawerButton();
 
@@ -21,7 +33,13 @@ public abstract class HomePageBase {
 
     public abstract By getMyBiz();
 
-    public abstract By getSearchBar();
+    public abstract By getSearchIcon();
+
+    public abstract By getLogo();
+
+    public abstract By getHeader();
+
+    public abstract By getSubHeader();
 
     public abstract By getPrimaryLob();
 

@@ -7,24 +7,29 @@ import pages.base.HomePageBase;
 public class HomePageAndroid extends HomePageBase {
     private final String selectYourLanguageLabel = "//android.widget.TextView[@text='Select your Language']";
     private final String continueButton = "//android.widget.Button[@resource-id='com.makemytrip:id/continueButton']";
+    private final String languageSkipButton = "com.makemytrip:id/skipTextView";
+    private final String loginScreen = "//android.widget.TextView[@text='Signup or Login ']";
+    private final String dismissButton = "com.makemytrip:id/snack_bar_footer_left";
     private final String completeActionUsingDevicePopUp = "//android.widget.TextView[@resource-id='android:id/title' and @text='Complete action using']";
     private final String continueWithEmail = "com.makemytrip:id/iv_changeToEmail";
     private final String closeLoginAlert = "com.makemytrip:id/back_key";
-    private final String drawerButton = "com.makemytrip:id/container_drawer";
+    private final String adBar = "com.makemytrip:id/rl_ad_bar";
+    private final String adBarCloseButton = "//android.widget.RelativeLayout[@resource-id='com.makemytrip:id/rl_ad_bar']/android.widget.ImageView[@resource-id='com.makemytrip:id/iv_cross']";
+    private final String adText = "com.makemytrip:id/tv_ad_text";
+    private final String drawerButton = "com.makemytrip:id/iv_drawer";
+    private final String logo = "com.makemytrip:id/iv_mmt_icon";
+    private final String header = "com.makemytrip:id/tvHeader";
+    private final String subHeader = "com.makemytrip:id/tvSubHeader";
     private final String myCash = "com.makemytrip:id/tv_mycash_text";
     private final String myBiz = "com.makemytrip:id/tv_mybiz_text";
-    private final String searchBar = "com.makemytrip:id/universal_search";
+    private final String searchIcon = "com.makemytrip:id/iv_universal_search_icon";
     private final String primaryLob = "com.makemytrip:id/primaryLob";
     private final String primaryLobItems = "//android.view.ViewGroup[@resource-id='com.makemytrip:id/primaryLob']//android.widget.Button";
     private final String primaryLobItem = "//android.view.ViewGroup[@resource-id='com.makemytrip:id/primaryLob']//android.widget.Button[@text='v1']";
-    //Flights, Hotels, Holiday Packages, Trains/Bus
     private final String secondaryLob = "com.makemytrip:id/secondaryLob";
     private final String secondaryLobItems = "//android.view.ViewGroup[@resource-id='com.makemytrip:id/secondaryLob']//android.widget.Button";
     private final String secondaryLobItem = "//android.view.ViewGroup[@resource-id='com.makemytrip:id/secondaryLob']//android.widget.Button[@text='v1']";
-    //Airport Cabs, Homestays & Villas, Outstation Cabs, Forex Card & Currency,
-    //Gift Cards, Hourly Stays, Nearby Staycations, Travel Insurance
     private final String getSecondaryLobExpand = "com.makemytrip:id/ll_more_container";
-    //Flight Status, PNR Status, Visa
     private final String HomeTab = "//android.widget.Button[@resource-id='com.makemytrip:id/rl_images' and @text='Home']";
     private final String BottomTabs = "//android.widget.Button[@resource-id='com.makemytrip:id/rl_images' and contains(@text,'')]";
     private final String BottomTab = "//android.widget.Button[@resource-id='com.makemytrip:id/rl_images' and contains(@text,'v1')]";
@@ -41,6 +46,20 @@ public class HomePageAndroid extends HomePageBase {
     }
 
     @Override
+    public By languageSelectionSkipButton() {
+        return By.id(languageSkipButton);
+    }
+
+    @Override
+    public By getLoginScreen() {
+        return By.xpath(loginScreen);
+    }
+
+    @Override
+    public By getDismissButton() {
+        return By.id(dismissButton);
+    }
+    @Override
     public By getCompleteActionUsingDevicePopUp() {
         return By.xpath(completeActionUsingDevicePopUp);
     }
@@ -53,6 +72,24 @@ public class HomePageAndroid extends HomePageBase {
     @Override
     public By getCloseLoginAlert() {
         return By.id(closeLoginAlert);
+    }
+    public By getClose() {
+        return By.id(closeLoginAlert);
+    }
+
+    @Override
+    public By getAdBar() {
+        return By.id(adBar);
+    }
+
+    @Override
+    public By getAdBarCloseButton() {
+        return By.xpath(adBarCloseButton);
+    }
+
+    @Override
+    public By getAdContent() {
+        return By.id(adText);
     }
 
     @Override
@@ -71,10 +108,24 @@ public class HomePageAndroid extends HomePageBase {
     }
 
     @Override
-    public By getSearchBar() {
-        return By.id(searchBar);
+    public By getSearchIcon() {
+        return By.id(searchIcon);
     }
 
+    @Override
+    public By getLogo() {
+        return By.id(logo);
+    }
+
+    @Override
+    public By getHeader() {
+        return By.id(header);
+    }
+
+    @Override
+    public By getSubHeader() {
+        return By.id(subHeader);
+    }
     @Override
     public By getPrimaryLob() {
         return By.id(primaryLob);

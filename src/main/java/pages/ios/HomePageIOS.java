@@ -9,13 +9,22 @@ import static gobal_constants.constants.EMPTY_STRING;
 public class HomePageIOS extends HomePageBase {
     private final String selectYourLanguageLabel = EMPTY_STRING;
     private final String continueButton = EMPTY_STRING;
+    private final String languageSkipButton = EMPTY_STRING;
+    private final String loginScreen = EMPTY_STRING;
+    private final String dismissButton = EMPTY_STRING;
     private final String completeActionUsingDevicePopUp = EMPTY_STRING;
     private final String continueWithEmail = EMPTY_STRING;
     private final String closeLoginAlert = EMPTY_STRING;
+    private final String adBar = EMPTY_STRING;
+    private final String adBarCloseButton = EMPTY_STRING;
+    private final String adText = EMPTY_STRING;
     private final String drawerButton = EMPTY_STRING;
     private final String myCash = EMPTY_STRING;
     private final String myBiz = EMPTY_STRING;
-    private final String searchBar = EMPTY_STRING;
+    private final String searchIcon = EMPTY_STRING;
+    private final String logo = EMPTY_STRING;
+    private final String header = EMPTY_STRING;
+    private final String subHeader = EMPTY_STRING;
     private final String primaryLob = EMPTY_STRING;
     private final String primaryLobItems = EMPTY_STRING;
     private final String primaryLobItem = EMPTY_STRING;
@@ -39,6 +48,21 @@ public class HomePageIOS extends HomePageBase {
     }
 
     @Override
+    public By languageSelectionSkipButton() {
+        return By.id(languageSkipButton);
+    }
+
+    @Override
+    public By getLoginScreen() {
+        return By.xpath(loginScreen);
+    }
+
+    @Override
+    public By getDismissButton() {
+        return By.id(dismissButton);
+    }
+
+    @Override
     public By getCompleteActionUsingDevicePopUp() {
         return By.xpath(completeActionUsingDevicePopUp);
     }
@@ -51,6 +75,21 @@ public class HomePageIOS extends HomePageBase {
     @Override
     public By getCloseLoginAlert() {
         return By.xpath(closeLoginAlert);
+    }
+
+    @Override
+    public By getAdBar() {
+        return By.id(adBar);
+    }
+
+    @Override
+    public By getAdBarCloseButton() {
+        return By.xpath(adBarCloseButton);
+    }
+
+    @Override
+    public By getAdContent() {
+        return By.id(adText);
     }
 
     @Override
@@ -69,8 +108,23 @@ public class HomePageIOS extends HomePageBase {
     }
 
     @Override
-    public By getSearchBar() {
-        return By.xpath(searchBar);
+    public By getSearchIcon() {
+        return By.xpath(searchIcon);
+    }
+
+    @Override
+    public By getLogo() {
+        return By.id(logo);
+    }
+
+    @Override
+    public By getHeader() {
+        return By.id(header);
+    }
+
+    @Override
+    public By getSubHeader() {
+        return By.id(subHeader);
     }
 
     @Override
