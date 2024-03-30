@@ -1,4 +1,4 @@
-@homepage
+@flights
 Feature: MakeMyTrip Flights Page Tests
 
   Scenario: Flights Page validations

@@ -14,7 +14,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
-import static utils.CommonUtils.waitForSeconds;
+import static io.github.the_sdet.common.CommonUtils.waitFor;
 import static utils.ConfigReader.*;
 
 @SuppressWarnings("unused")
@@ -37,7 +37,7 @@ public class Engine {
         // Start the Appium server
         service = AppiumDriverLocalService.buildService(builder);
         service.start();
-        //service.clearOutPutStreams();
+        service.clearOutPutStreams();
         URL appiumserverUrl = service.getUrl();
         Log.info("Appium Server started at: " + appiumserverUrl);
         return appiumserverUrl;
@@ -71,6 +71,9 @@ public class Engine {
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(properties.getProperty("implicit.wait"))));
         Log.info("Driver Started....");
+        waitFor(Duration.ofSeconds(2));
+        activateApp();
+        waitFor(Duration.ofSeconds(2));
         tlDriver.set(driver);
     }
 
@@ -84,12 +87,27 @@ public class Engine {
             try {
                 ((AndroidDriver) driver).terminateApp(appPackage);
             } catch (WebDriverException e) {
-                waitForSeconds(2);
+                waitFor(Duration.ofSeconds(2));
                 ((AndroidDriver) driver).terminateApp(appPackage);
             }
-            waitForSeconds(2);
+            waitFor(Duration.ofSeconds(2));
             driver.quit();
             Log.info("App Terminated...");
+        }
+    }
+
+    public static void activateApp() {
+        AppiumDriver driver = tlDriver.get();
+        if (driver instanceof AndroidDriver androidDriver) {
+            String currentPackage = androidDriver.currentActivity();
+            if (currentPackage == null || !currentPackage.equals(appPackage)) {
+                androidDriver.activateApp(appPackage);
+                Log.info("App Activated...");
+            } else {
+                Log.info("App is already active.");
+            }
+        } else {
+            Log.error("This method is only applicable for AndroidDriver.");
         }
     }
 
