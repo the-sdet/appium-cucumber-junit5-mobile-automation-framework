@@ -1,4 +1,5 @@
-@home
+#Author: Pabitra Swain (contact.the.sdet@gmail.com)
+@drawer
 Feature: MakeMyTrip Menu Drawer Tests
 
   Background: User is on MakeMyTrip Home Page
@@ -25,15 +26,15 @@ Feature: MakeMyTrip Menu Drawer Tests
       | Wishlist          |
     And "Rewards" section should be available
     And "Rewards" section should have below 4 items in it
-      | Gift Cards           |
-      | Rewards              |
-      | Refer & Earn         |
-      | Holiday refer & Earn |
+      | Gift Cards            |
+      | Rewards               |
+      | Refer & Earn          |
+      | Holidays Refer & Earn |
     And "Settings" section should be available
     And "Settings" section should have below 2 items in it
-      | Language |
-      | Country  |
+      | Language English |
+      | Country in       |
     And "Rate Us link" should be present at the bottom of the Menu Drawer
     And "Privacy Policy link" should be present at the bottom of the Menu Drawer
     And "App Version" should be present at the bottom of the Menu Drawer
-    And App Version should be "9.0.8"
+    And App Version should be "9.1.1"

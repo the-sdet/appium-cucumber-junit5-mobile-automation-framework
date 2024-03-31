@@ -14,12 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static engine.Engine.isAndroid;
-import static io.github.the_sdet.common.CommonUtils.replaceLineBreaksWithSpace;
 import static io.github.the_sdet.cucumber.CucumberUtils.logToReport;
 
 public class HomePage extends AppiumUtils {
     public HomePageBase homePage;
-    AppiumDriver driver;
 
     /**
      * Constructor to initialize AppiumUtils.
@@ -29,7 +27,6 @@ public class HomePage extends AppiumUtils {
      */
     public HomePage(AppiumDriver driver) {
         super(driver);
-        this.driver = driver;
         homePage = isAndroid() ? new HomePageAndroid() : new HomePageIOS();
     }
 
@@ -54,7 +51,7 @@ public class HomePage extends AppiumUtils {
         By loginAlertCloseButton = homePage.getCloseLoginAlert();
         if (waitAndCheckIsVisible(loginAlertCloseButton, Duration.ofSeconds(5))) {
             logToReport("Login Alert is Visible...");
-            click(driver.findElement(loginAlertCloseButton));
+            click(getElement(loginAlertCloseButton));
         } else logToReport("Login Alert is NOT Visible...");
     }
 
@@ -92,12 +89,12 @@ public class HomePage extends AppiumUtils {
     }
 
     public int navBarItemsCount() {
-        return driver.findElements(homePage.getBottomTabs()).size();
+        return getElements(homePage.getBottomTabs()).size();
     }
 
     public List<String> navBarItems() {
         List<String> navBarItems = new ArrayList<>();
-        List<WebElement> items = driver.findElements(homePage.getBottomTabs());
+        List<WebElement> items = getElements(homePage.getBottomTabs());
         for (WebElement navBarItem : items) {
             navBarItems.add(navBarItem.getText());
         }
@@ -109,16 +106,11 @@ public class HomePage extends AppiumUtils {
     }
 
     public int primaryLobItemsCount() {
-        return driver.findElements(homePage.getPrimaryLobItems()).size();
+        return getElements(homePage.getPrimaryLobItems()).size();
     }
 
     public List<String> primaryLobItems() {
-        List<String> primaryLobItems = new ArrayList<>();
-        List<WebElement> items = driver.findElements(homePage.getPrimaryLobItems());
-        for (WebElement primaryLobItem : items) {
-            primaryLobItems.add(replaceLineBreaksWithSpace(primaryLobItem.getText()));
-        }
-        return primaryLobItems;
+        return getElementsTextContent((homePage.getPrimaryLobItems()));
     }
 
     public boolean isSecondaryLobDisplayed() {
@@ -126,16 +118,11 @@ public class HomePage extends AppiumUtils {
     }
 
     public int secondaryLobItemsCount() {
-        return driver.findElements(homePage.getSecondaryLobItems()).size();
+        return getElements(homePage.getSecondaryLobItems()).size();
     }
 
     public List<String> secondaryLobItems() {
-        List<String> secondaryLobItems = new ArrayList<>();
-        List<WebElement> items = driver.findElements(homePage.getSecondaryLobItems());
-        for (WebElement secondaryLobItem : items) {
-            secondaryLobItems.add(replaceLineBreaksWithSpace(secondaryLobItem.getText()));
-        }
-        return secondaryLobItems;
+        return getElementsTextContent(homePage.getSecondaryLobItems());
     }
 
     public boolean isExpandLobButtonVisible() {
@@ -147,34 +134,5 @@ public class HomePage extends AppiumUtils {
             click(homePage.getDismissButton());
         waitFor(Duration.ofSeconds(2));
         click(homePage.getGetSecondaryLobExpand());
-    }
-
-    public boolean isAppDrawerDisplayed() {
-        return isVisible(homePage.getMenuDrawer());
-    }
-
-    public void closeMenuDrawer() {
-        swipeRight(homePage.getMenuDrawer());
-    }
-
-    public boolean isLoginSignUpButtonDisplayed() {
-        return isVisible(homePage.getLoginSignUpButton());
-    }
-
-    public List<String> drawerPrimaryItems() {
-        return getElementsTextContent(homePage.getPrimaryItemsInMenuDrawer(), true);
-    }
-
-    public boolean verifyMenuDrawerBottom(String item) {
-        return switch (item.toLowerCase()) {
-            case "rate us link" -> isVisible(homePage.getMenuDrawerBottomLinks("Rate Us"));
-            case "privacy policy link" -> isVisible(homePage.getMenuDrawerBottomLinks("Privacy policy"));
-            default -> isVisible(homePage.getMenuDrawerBottomLinks("App Version"));
-        };
-    }
-
-    public String getAppVersion() {
-        return driver.findElement(homePage.getMenuDrawerBottomLinks("App Version"))
-                .getText().split("Version ")[1];
     }
 }

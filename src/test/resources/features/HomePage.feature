@@ -1,3 +1,4 @@
+#Author: Pabitra Swain (contact.the.sdet@gmail.com)
 @home
 Feature: MakeMyTrip Home Page Tests
 

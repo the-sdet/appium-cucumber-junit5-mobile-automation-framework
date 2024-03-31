@@ -10,18 +10,25 @@ import pages.pageobjects.HomePage;
 import static engine.Engine.getDriver;
 
 public class HomePageSteps {
+    static boolean isFirstScenario = true;
     HomePage homePage = new HomePage(getDriver());
 
     @And("User closes Login Popup and Ads if any")
     public void userClosesLoginPopupAndAdsIfAny() {
-        homePage.closeLoginPopUp();
-        homePage.closeAdsIfAny();
+        if (isFirstScenario) {
+            homePage.closeLoginPopUp();
+            homePage.closeAdsIfAny();
+            isFirstScenario = false;
+        }
     }
 
     @Given("User skips language selection and login screen")
     public void userSkipsLanguageSelectionAndLoginScreen() {
-        homePage.skipLanguageSelection();
-        homePage.skipInitialLoginScreen();
+        if (isFirstScenario) {
+            //Background is needed only for first scenario.
+            homePage.skipLanguageSelection();
+            homePage.skipInitialLoginScreen();
+        }
     }
 
     @Then("User should see the Hamburger Menu Icon at top left")

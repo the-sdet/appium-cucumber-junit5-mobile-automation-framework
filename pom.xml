@@ -12,34 +12,24 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <selenium.version>4.18.1</selenium.version>
-        <playwright.version>1.31.0</playwright.version>
         <appium.version>9.1.0</appium.version>
         <cucumber.version>7.15.0</cucumber.version>
-        <automation.utils.version>1.2.3</automation.utils.version>
-        <google.json.version>1.1.1</google.json.version>
+        <test.automation.toolkit.version>1.0.1</test.automation.toolkit.version>
         <guava.version>33.0.0-jre</guava.version>
         <junit.platform.suite.version>1.9.2</junit.platform.suite.version>
         <surefire.plugin.version>3.1.2</surefire.plugin.version>
         <mvn.compiler.plugin.version>3.12.1</mvn.compiler.plugin.version>
         <mvn.resource.plugin.version>3.1.0</mvn.resource.plugin.version>
-        <allure.version>2.21.0</allure.version>
         <gherkin.version>26.0.1</gherkin.version>
         <lombok.version>1.18.20</lombok.version>
         <slf4j.version>2.0.5</slf4j.version>
         <log4j-version>2.20.0</log4j-version>
         <extent.version>1.14.0</extent.version>
-        <rest.assured.version>5.1.1</rest.assured.version>
         <poi.version>5.2.5</poi.version>
         <common.io.version>2.7</common.io.version>
-        <odbc8.version>21.1.0.0</odbc8.version>
-        <sql.server.jdbc.version>11.2.1.jre8</sql.server.jdbc.version>
-        <json.version>20231013</json.version>
-        <json.path.version>2.9.0</json.path.version>
-        <javax.mail.version>1.6.2</javax.mail.version>
-        <sun.javax.mail.version>1.6.2</sun.javax.mail.version>
         <maven.cucumber.reporting.version>5.8.0</maven.cucumber.reporting.version>
 
         <execution.type>local</execution.type>
@@ -87,12 +77,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.microsoft.playwright</groupId>
-            <artifactId>playwright</artifactId>
-            <version>${playwright.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
@@ -102,12 +86,6 @@
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>${appium.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber7-jvm</artifactId>
-            <version>${allure.version}</version>
         </dependency>
 
         <dependency>
@@ -147,12 +125,6 @@
         </dependency>
 
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>${rest.assured.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>${poi.version}</version>
@@ -171,12 +143,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <version>${sql.server.jdbc.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
@@ -184,39 +150,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>${json.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <version>${json.path.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>
-            <version>${javax.mail.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
-            <version>${sun.javax.mail.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>${google.json.version}</version>
         </dependency>
 
         <dependency>
@@ -227,8 +163,8 @@
 
             <dependency>
               <groupId>io.github.the-sdet</groupId>
-              <artifactId>test-automation-utils</artifactId>
-              <version>${automation.utils.version}</version>
+              <artifactId>test-automation-toolkit</artifactId>
+              <version>${test.automation.toolkit.version}</version>
             </dependency>
 
     </dependencies>
