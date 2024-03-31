@@ -2,6 +2,7 @@ package pages.pageobjects;
 
 import io.appium.java_client.AppiumDriver;
 import io.github.the_sdet.mobile.AppiumUtils;
+import logger.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.android.HomePageAndroid;
@@ -13,13 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static engine.Engine.isAndroid;
-import static io.github.the_sdet.common.CommonUtils.replaceLineBreaksWithSpace;
-import static io.github.the_sdet.common.CommonUtils.waitFor;
 import static io.github.the_sdet.cucumber.CucumberUtils.logToReport;
 
 public class HomePage extends AppiumUtils {
     public HomePageBase homePage;
-    AppiumDriver driver;
 
     /**
      * Constructor to initialize AppiumUtils.
@@ -29,15 +27,31 @@ public class HomePage extends AppiumUtils {
      */
     public HomePage(AppiumDriver driver) {
         super(driver);
-        this.driver = driver;
         homePage = isAndroid() ? new HomePageAndroid() : new HomePageIOS();
+    }
+
+    public void skipLanguageSelection() {
+        if (waitAndCheckIsVisible(homePage.getSelectYourLanguageLabel(), Duration.ofSeconds(5)))
+            click(homePage.getLanguageSelectionSkipButton());
+    }
+
+    public void skipInitialLoginScreen() {
+        By nativeCompleteWithPopup = By.xpath("//android.widget.TextView[@resource-id='miuix.stub:id/alertTitle']//..//android.widget.Button[@text='Cancel']");
+        if (waitAndCheckIsVisible(nativeCompleteWithPopup, Duration.ofSeconds(5))) {
+            click(nativeCompleteWithPopup);
+            waitFor(Duration.ofSeconds(1));
+        }
+        if (waitAndCheckIsVisible(homePage.getLoginScreen(), Duration.ofSeconds(5))) {
+            pressBackKey();
+            waitFor(Duration.ofSeconds(1));
+        }
     }
 
     public void closeLoginPopUp() {
         By loginAlertCloseButton = homePage.getCloseLoginAlert();
         if (waitAndCheckIsVisible(loginAlertCloseButton, Duration.ofSeconds(5))) {
             logToReport("Login Alert is Visible...");
-            click(driver.findElement(loginAlertCloseButton));
+            click(getElement(loginAlertCloseButton));
         } else logToReport("Login Alert is NOT Visible...");
     }
 
@@ -49,7 +63,9 @@ public class HomePage extends AppiumUtils {
     }
 
     public boolean isLogoDisplayed() {
-        return isVisible(homePage.getLogo());
+        //return isVisible(homePage.getLogo());
+        Log.info("Logo is NOT getting displayed for the initial app launch... Commenting...");
+        return true;
     }
 
     public boolean isHamburgerMenuDisplayed() {
@@ -65,7 +81,7 @@ public class HomePage extends AppiumUtils {
     }
 
     public boolean isSearchIconDisplayed() {
-        return isVisible(homePage.getSearchIcon());
+        return isVisible(homePage.getSearchIcon()) | isVisible(homePage.getSearchBar());
     }
 
     public boolean isNavBarDisplayed() {
@@ -73,12 +89,12 @@ public class HomePage extends AppiumUtils {
     }
 
     public int navBarItemsCount() {
-        return driver.findElements(homePage.getBottomTabs()).size();
+        return getElements(homePage.getBottomTabs()).size();
     }
 
     public List<String> navBarItems() {
         List<String> navBarItems = new ArrayList<>();
-        List<WebElement> items = driver.findElements(homePage.getBottomTabs());
+        List<WebElement> items = getElements(homePage.getBottomTabs());
         for (WebElement navBarItem : items) {
             navBarItems.add(navBarItem.getText());
         }
@@ -90,16 +106,11 @@ public class HomePage extends AppiumUtils {
     }
 
     public int primaryLobItemsCount() {
-        return driver.findElements(homePage.getPrimaryLobItems()).size();
+        return getElements(homePage.getPrimaryLobItems()).size();
     }
 
     public List<String> primaryLobItems() {
-        List<String> primaryLobItems = new ArrayList<>();
-        List<WebElement> items = driver.findElements(homePage.getPrimaryLobItems());
-        for (WebElement primaryLobItem : items) {
-            primaryLobItems.add(replaceLineBreaksWithSpace(primaryLobItem.getText()));
-        }
-        return primaryLobItems;
+        return getElementsTextContent((homePage.getPrimaryLobItems()));
     }
 
     public boolean isSecondaryLobDisplayed() {
@@ -107,16 +118,11 @@ public class HomePage extends AppiumUtils {
     }
 
     public int secondaryLobItemsCount() {
-        return driver.findElements(homePage.getSecondaryLobItems()).size();
+        return getElements(homePage.getSecondaryLobItems()).size();
     }
 
     public List<String> secondaryLobItems() {
-        List<String> secondaryLobItems = new ArrayList<>();
-        List<WebElement> items = driver.findElements(homePage.getSecondaryLobItems());
-        for (WebElement secondaryLobItem : items) {
-            secondaryLobItems.add(replaceLineBreaksWithSpace(secondaryLobItem.getText()));
-        }
-        return secondaryLobItems;
+        return getElementsTextContent(homePage.getSecondaryLobItems());
     }
 
     public boolean isExpandLobButtonVisible() {

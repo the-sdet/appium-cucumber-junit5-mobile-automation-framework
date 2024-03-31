@@ -9,7 +9,7 @@ public abstract class HomePageBase {
 
     public abstract By getContinueButton();
 
-    public abstract By languageSelectionSkipButton();
+    public abstract By getLanguageSelectionSkipButton();
 
     public abstract By getLoginScreen();
 
@@ -34,6 +34,28 @@ public abstract class HomePageBase {
     public abstract By getMyBiz();
 
     public abstract By getSearchIcon();
+
+    public abstract By getSearchBar();
+
+    public abstract By getMenuDrawer();
+
+    public abstract By getLoginSignUpButton();
+
+    public abstract By getPrimaryItemsInMenuDrawer();
+
+    public abstract By getMyTripsSection();
+
+    public abstract By getMyTripsItems();
+
+    public abstract By getRewardsSection();
+
+    public abstract By getRewardsItems();
+
+    public abstract By getSettingsSection();
+
+    public abstract By getSettingsItems();
+
+    public abstract By getMenuDrawerBottomLinks(String itemText);
 
     public abstract By getLogo();
 

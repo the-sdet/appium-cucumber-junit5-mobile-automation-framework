@@ -7,15 +7,15 @@ import pages.base.HomePageBase;
 public class HomePageAndroid extends HomePageBase {
     private final String selectYourLanguageLabel = "//android.widget.TextView[@text='Select your Language']";
     private final String continueButton = "//android.widget.Button[@resource-id='com.makemytrip:id/continueButton']";
-    private final String languageSkipButton = "com.makemytrip:id/skipTextView";
+    private final String languageSelectionSkipButton = "com.makemytrip:id/skipTextView";
     private final String loginScreen = "//android.widget.TextView[@text='Signup or Login ']";
     private final String dismissButton = "com.makemytrip:id/snack_bar_footer_left";
     private final String completeActionUsingDevicePopUp = "//android.widget.TextView[@resource-id='android:id/title' and @text='Complete action using']";
     private final String continueWithEmail = "com.makemytrip:id/iv_changeToEmail";
     private final String closeLoginAlert = "com.makemytrip:id/back_key";
     private final String adBar = "com.makemytrip:id/rl_ad_bar";
-    private final String adBarCloseButton = "//android.widget.RelativeLayout[@resource-id='com.makemytrip:id/rl_ad_bar']/android.widget.ImageView[@resource-id='com.makemytrip:id/iv_cross']";
-    private final String adText = "com.makemytrip:id/tv_ad_text";
+    private final String adBarCloseButton = "//android.widget.ImageView[@resource-id='com.makemytrip:id/iv_cross']";
+    private final String adContent = "com.makemytrip:id/tv_ad_text";
     private final String drawerButton = "com.makemytrip:id/iv_drawer";
     private final String logo = "com.makemytrip:id/iv_mmt_icon";
     private final String header = "com.makemytrip:id/tvHeader";
@@ -23,6 +23,17 @@ public class HomePageAndroid extends HomePageBase {
     private final String myCash = "com.makemytrip:id/tv_mycash_text";
     private final String myBiz = "com.makemytrip:id/tv_mybiz_text";
     private final String searchIcon = "com.makemytrip:id/iv_universal_search_icon";
+    private final String searchBar = "com.makemytrip:id/universal_search";
+    private final String menuDrawer = "com.makemytrip:id/nav_view";
+    private final String loginSignUpButton = "//android.widget.Button[@text='Login/Sign-up now Login for best deals & offers']";
+    private final String primaryItemsInMenuDrawer = "//android.widget.Button[contains(@resource-id,'com.makemytrip:id/item')]";
+    private final String myTripsSection = "//android.widget.TextView[@resource-id='com.makemytrip:id/tv_title' and @text='My Trips']";
+    private final String myTripsItems = "//android.widget.TextView[@text='My Trips']/following-sibling::android.widget.Button";
+    private final String rewardsSection = "//android.widget.TextView[@resource-id='com.makemytrip:id/tv_title' and @text='Rewards']";
+    private final String rewardsItems = "//android.widget.TextView[@text='Rewards']/following-sibling::android.widget.Button";
+    private final String settingsSection = "//android.widget.TextView[@resource-id='com.makemytrip:id/tv_title' and @text='Settings']";
+    private final String settingsItems = "//android.widget.TextView[@text='Settings']/following-sibling::android.widget.Button";
+    private final String menuDrawerBottomLinks = "//android.widget.Button[contains(@text,'v1')] | //android.widget.TextView[contains(@text,'v1')]";
     private final String primaryLob = "com.makemytrip:id/primaryLob";
     private final String primaryLobItems = "//android.view.ViewGroup[@resource-id='com.makemytrip:id/primaryLob']//android.widget.Button";
     private final String primaryLobItem = "//android.view.ViewGroup[@resource-id='com.makemytrip:id/primaryLob']//android.widget.Button[@text='v1']";
@@ -46,8 +57,8 @@ public class HomePageAndroid extends HomePageBase {
     }
 
     @Override
-    public By languageSelectionSkipButton() {
-        return By.id(languageSkipButton);
+    public By getLanguageSelectionSkipButton() {
+        return By.id(languageSelectionSkipButton);
     }
 
     @Override
@@ -59,6 +70,7 @@ public class HomePageAndroid extends HomePageBase {
     public By getDismissButton() {
         return By.id(dismissButton);
     }
+
     @Override
     public By getCompleteActionUsingDevicePopUp() {
         return By.xpath(completeActionUsingDevicePopUp);
@@ -73,6 +85,7 @@ public class HomePageAndroid extends HomePageBase {
     public By getCloseLoginAlert() {
         return By.id(closeLoginAlert);
     }
+
     public By getClose() {
         return By.id(closeLoginAlert);
     }
@@ -89,7 +102,7 @@ public class HomePageAndroid extends HomePageBase {
 
     @Override
     public By getAdContent() {
-        return By.id(adText);
+        return By.id(adContent);
     }
 
     @Override
@@ -113,6 +126,61 @@ public class HomePageAndroid extends HomePageBase {
     }
 
     @Override
+    public By getSearchBar() {
+        return By.id(searchBar);
+    }
+
+    @Override
+    public By getMenuDrawer() {
+        return By.id(menuDrawer);
+    }
+
+    @Override
+    public By getLoginSignUpButton() {
+        return By.xpath(loginSignUpButton);
+    }
+
+    @Override
+    public By getPrimaryItemsInMenuDrawer() {
+        return By.xpath(primaryItemsInMenuDrawer);
+    }
+
+    @Override
+    public By getMyTripsSection() {
+        return By.xpath(myTripsSection);
+    }
+
+    @Override
+    public By getMyTripsItems() {
+        return By.xpath(myTripsItems);
+    }
+
+    @Override
+    public By getRewardsSection() {
+        return By.xpath(rewardsSection);
+    }
+
+    @Override
+    public By getRewardsItems() {
+        return By.xpath(rewardsItems);
+    }
+
+    @Override
+    public By getSettingsSection() {
+        return By.xpath(settingsSection);
+    }
+
+    @Override
+    public By getSettingsItems() {
+        return By.xpath(settingsItems);
+    }
+
+    @Override
+    public By getMenuDrawerBottomLinks(String itemText) {
+        return By.xpath(menuDrawerBottomLinks.replace("v1", itemText));
+    }
+
+    @Override
     public By getLogo() {
         return By.id(logo);
     }
@@ -126,6 +194,7 @@ public class HomePageAndroid extends HomePageBase {
     public By getSubHeader() {
         return By.id(subHeader);
     }
+
     @Override
     public By getPrimaryLob() {
         return By.id(primaryLob);
