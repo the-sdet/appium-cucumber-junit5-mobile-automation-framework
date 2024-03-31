@@ -1,6 +1,5 @@
 # Comprehensive Mobile Automation Framework
 
-<hr>
 <a href="https://appium.io/"><img align="center" src="src/test/resources/logos/appium-logo.png" height="40" width="40" alt="Appium"/></a> &nbsp;
 <a href="https://www.selenium.dev/"><img align="center" src="src/test/resources/logos/selenium-logo.png" height="40" width="40" alt="Selenium"/></a> &nbsp;
 <a href="https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html"><img align="center" src="src/test/resources/logos/java-logo.svg" height="40" width="40" alt="Java"/></a> &nbsp;
