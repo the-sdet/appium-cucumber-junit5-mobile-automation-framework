@@ -1,5 +1,5 @@
 #Author: Pabitra Swain (contact.the.sdet@gmail.com)
-@drawer
+@drawer @menu
 Feature: MakeMyTrip Menu Drawer Tests
 
   Background: User is on MakeMyTrip Home Page

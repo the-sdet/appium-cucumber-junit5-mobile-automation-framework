@@ -2,6 +2,7 @@ package engine;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import logger.Log;
@@ -71,7 +72,6 @@ public class Engine {
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(properties.getProperty("implicit.wait"))));
         Log.info("Driver Started....");
-        //activateApp();
         tlDriver.set(driver);
     }
 
@@ -95,13 +95,32 @@ public class Engine {
     }
 
     public static void activateApp() {
-        AppiumDriver driver = tlDriver.get();
         if (isAndroid()) {
-            ((AndroidDriver) driver).activateApp(appPackage);
-            Log.info("App Activated...");
-            waitFor(Duration.ofSeconds(2));
+            ((AndroidDriver) getDriver()).activateApp(appPackage);
+            waitFor(Duration.ofSeconds(1));
         } else {
-            Log.error("This method is only applicable for AndroidDriver.");
+            ((IOSDriver) getDriver()).activateApp(appPackage);
+            waitFor(Duration.ofSeconds(1));
+        }
+        Log.info("App Activated...");
+    }
+
+    public static void relaunchApp() {
+        if (isAndroid()) {
+            try {
+                ((AndroidDriver) getDriver()).terminateApp(appPackage);
+            } catch (Exception e) {
+                waitFor(Duration.ofSeconds(1));
+                ((AndroidDriver) getDriver()).terminateApp(appPackage);
+            }
+            waitFor(Duration.ofSeconds(1));
+            ((AndroidDriver) getDriver()).activateApp(appPackage);
+            waitFor(Duration.ofSeconds(1));
+        } else {
+            ((IOSDriver) getDriver()).terminateApp(appPackage);
+            waitFor(Duration.ofSeconds(1));
+            ((IOSDriver) getDriver()).activateApp(appPackage);
+            waitFor(Duration.ofSeconds(1));
         }
     }
 

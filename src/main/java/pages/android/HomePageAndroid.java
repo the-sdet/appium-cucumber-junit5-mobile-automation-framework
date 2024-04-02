@@ -3,6 +3,8 @@ package pages.android;
 import org.openqa.selenium.By;
 import pages.base.HomePageBase;
 
+import static io.github.the_sdet.web.Utils.customizeXpath;
+
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class HomePageAndroid extends HomePageBase {
     private final String selectYourLanguageLabel = "//android.widget.TextView[@text='Select your Language']";
@@ -10,6 +12,8 @@ public class HomePageAndroid extends HomePageBase {
     private final String languageSelectionSkipButton = "com.makemytrip:id/skipTextView";
     private final String loginScreen = "//android.widget.TextView[@text='Signup or Login ']";
     private final String dismissButton = "com.makemytrip:id/snack_bar_footer_left";
+    private final String cta = "//android.widget.TextView[@resource-id='com.makemytrip:id/tv_right_cta']";
+    private final String ctaClose = "//android.widget.ImageView[@resource-id='com.makemytrip:id/iv_close']";
     private final String completeActionUsingDevicePopUp = "//android.widget.TextView[@resource-id='android:id/title' and @text='Complete action using']";
     private final String continueWithEmail = "com.makemytrip:id/iv_changeToEmail";
     private final String closeLoginAlert = "com.makemytrip:id/back_key";
@@ -40,11 +44,12 @@ public class HomePageAndroid extends HomePageBase {
     private final String secondaryLob = "com.makemytrip:id/secondaryLob";
     private final String secondaryLobItems = "//android.view.ViewGroup[@resource-id='com.makemytrip:id/secondaryLob']//android.widget.Button";
     private final String secondaryLobItem = "//android.view.ViewGroup[@resource-id='com.makemytrip:id/secondaryLob']//android.widget.Button[@text='v1']";
-    private final String getSecondaryLobExpand = "com.makemytrip:id/ll_more_container";
+    private final String lobItem = "//android.view.ViewGroup[contains(@resource-id,'Lob')]//android.widget.Button[@text='v1']";
+    private final String getSecondaryLobExpand = "//android.view.ViewGroup[contains(@resource-id,'secondaryLob')]//*[contains(@resource-id,'ll_more_container')]";
     private final String HomeTab = "//android.widget.Button[@resource-id='com.makemytrip:id/rl_images' and @text='Home']";
     private final String BottomTabs = "//android.widget.Button[@resource-id='com.makemytrip:id/rl_images' and contains(@text,'')]";
     private final String BottomTab = "//android.widget.Button[@resource-id='com.makemytrip:id/rl_images' and contains(@text,'v1')]";
-    private final String backButton = "//android.widget.ImageButton[@content-desc='Back'] | //android.widget.ImageView[@content-desc='Back'] | //android.widget.TextView[@text='Trains & Bus']//preceding-sibling::android.view.ViewGroup | //android.widget.TextView[@text='Holiday Packages']//preceding-sibling::android.view.ViewGroup";
+    private final String backButton = "//android.widget.ImageButton[@resource-id='com.makemytrip:id/ib_back']";
 
     @Override
     public By getSelectYourLanguageLabel() {
@@ -69,6 +74,16 @@ public class HomePageAndroid extends HomePageBase {
     @Override
     public By getDismissButton() {
         return By.id(dismissButton);
+    }
+
+    @Override
+    public By getCta() {
+        return By.xpath(cta);
+    }
+
+    @Override
+    public By getCtaClose() {
+        return By.xpath(ctaClose);
     }
 
     @Override
@@ -206,8 +221,8 @@ public class HomePageAndroid extends HomePageBase {
     }
 
     @Override
-    public By getPrimaryLobItem() {
-        return By.xpath(primaryLobItem);
+    public By getPrimaryLobItem(String lobName) {
+        return By.xpath(customizeXpath(primaryLobItem, lobName));
     }
 
     @Override
@@ -221,13 +236,18 @@ public class HomePageAndroid extends HomePageBase {
     }
 
     @Override
-    public By getSecondaryLobItem() {
-        return By.xpath(secondaryLobItem);
+    public By getSecondaryLobItem(String lobName) {
+        return By.xpath(customizeXpath(secondaryLobItem, lobName));
+    }
+
+    @Override
+    public By getLobItem(String lobName) {
+        return By.xpath(customizeXpath(lobItem, lobName));
     }
 
     @Override
     public By getGetSecondaryLobExpand() {
-        return By.id(getSecondaryLobExpand);
+        return By.xpath(getSecondaryLobExpand);
     }
 
     @Override

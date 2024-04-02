@@ -6,6 +6,10 @@ import org.openqa.selenium.By;
 public abstract class FlightsPageBase {
     public abstract By getFlightsHeader();
 
+    public abstract By getBackButton();
+
+    public abstract By getTab(String tabName);
+
     public abstract By getFrom();
 
     public abstract By getFromSelectedCity();
@@ -26,13 +30,15 @@ public abstract class FlightsPageBase {
 
     public abstract By getFromDateSelected();
 
+    public abstract By getFromDayAndYearSelected();
+
     public abstract By getReturnDate();
 
     public abstract By getReturnSelected();
 
     public abstract By getTravelersAndClass();
 
-    public abstract By getTravelerSelected();
+    public abstract By getTravelerCount();
 
     public abstract By getClassSelected();
 

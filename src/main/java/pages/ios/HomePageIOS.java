@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import pages.base.HomePageBase;
 
 import static gobalconstants.constants.EMPTY_STRING;
+import static io.github.the_sdet.web.Utils.customizeXpath;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class HomePageIOS extends HomePageBase {
@@ -12,6 +13,8 @@ public class HomePageIOS extends HomePageBase {
     private final String languageSkipButton = EMPTY_STRING;
     private final String loginScreen = EMPTY_STRING;
     private final String dismissButton = EMPTY_STRING;
+    private final String cta = EMPTY_STRING;
+    private final String ctaClose = EMPTY_STRING;
     private final String completeActionUsingDevicePopUp = EMPTY_STRING;
     private final String continueWithEmail = EMPTY_STRING;
     private final String closeLoginAlert = EMPTY_STRING;
@@ -33,6 +36,7 @@ public class HomePageIOS extends HomePageBase {
     private final String secondaryLobItems = EMPTY_STRING;
     private final String secondaryLobItem = EMPTY_STRING;
     private final String getSecondaryLobExpand = EMPTY_STRING;
+    private final String lobItem = EMPTY_STRING;
     private final String HomeTab = EMPTY_STRING;
     private final String BottomTabs = EMPTY_STRING;
     private final String BottomTab = EMPTY_STRING;
@@ -62,7 +66,15 @@ public class HomePageIOS extends HomePageBase {
     public By getDismissButton() {
         return By.id(dismissButton);
     }
+    @Override
+    public By getCta() {
+        return By.xpath(cta);
+    }
 
+    @Override
+    public By getCtaClose() {
+        return By.xpath(ctaClose);
+    }
     @Override
     public By getCompleteActionUsingDevicePopUp() {
         return By.xpath(completeActionUsingDevicePopUp);
@@ -194,8 +206,8 @@ public class HomePageIOS extends HomePageBase {
     }
 
     @Override
-    public By getPrimaryLobItem() {
-        return By.xpath(primaryLobItem);
+    public By getPrimaryLobItem(String lobName) {
+        return By.xpath(customizeXpath(primaryLobItem, lobName));
     }
 
     @Override
@@ -209,8 +221,13 @@ public class HomePageIOS extends HomePageBase {
     }
 
     @Override
-    public By getSecondaryLobItem() {
-        return By.xpath(secondaryLobItem);
+    public By getSecondaryLobItem(String lobName) {
+        return By.xpath(customizeXpath(secondaryLobItem, lobName));
+    }
+
+    @Override
+    public By getLobItem(String lobName) {
+        return By.xpath(customizeXpath(lobItem, lobName));
     }
 
     @Override

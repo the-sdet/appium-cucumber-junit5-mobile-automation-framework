@@ -14,6 +14,8 @@ public abstract class HomePageBase {
     public abstract By getLoginScreen();
 
     public abstract By getDismissButton();
+    public abstract By getCta();
+    public abstract By getCtaClose();
 
     public abstract By getCompleteActionUsingDevicePopUp();
 
@@ -67,13 +69,15 @@ public abstract class HomePageBase {
 
     public abstract By getPrimaryLobItems();
 
-    public abstract By getPrimaryLobItem();
+    public abstract By getPrimaryLobItem(String lobName);
 
     public abstract By getSecondaryLob();
 
     public abstract By getSecondaryLobItems();
 
-    public abstract By getSecondaryLobItem();
+    public abstract By getSecondaryLobItem(String lobName);
+
+    public abstract By getLobItem(String lobName);
 
     public abstract By getGetSecondaryLobExpand();
 

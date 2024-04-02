@@ -3,11 +3,20 @@ package hooks;
 import io.cucumber.java.*;
 import logger.Log;
 
+import java.util.HashSet;
+
 import static engine.Engine.*;
-import static io.github.the_sdet.cucumber.CucumberUtils.*;
+import static io.github.the_sdet.cucumber.CucumberUtils.logToReport;
+import static io.github.the_sdet.cucumber.CucumberUtils.setCurrentScenario;
+import static utils.CommonUtils.attachScreenshotPerConfig;
+import static utils.CommonUtils.getFeatureNameFromScenario;
+import static utils.ResultManager.*;
 
 @SuppressWarnings("unused")
 public class Hooks {
+    static String featureName;
+    static HashSet<String> features = new HashSet<>();
+
     @BeforeAll
     public static void beforeAll() {
         initializeDriver();
@@ -15,21 +24,28 @@ public class Hooks {
 
     @Before
     public void beforeTest(Scenario scenario) {
+        String currentFeatureName = getFeatureNameFromScenario(scenario, false);
+        if (!features.contains(currentFeatureName)) {
+            featureName = currentFeatureName;
+            features.add(featureName);
+
+            //Initialize Result Map for Current Feature...
+            initializeResultCollector(featureName);
+        }
         setCurrentScenario(scenario);
         logToReport(scenario.getName() + " Started...");
     }
 
     @After
     public void afterTest(Scenario scenario) {
-        if (scenario.isFailed())
-            logFailureToReport(scenario.getName() + " Completed...");
-        else
-            logSuccessToReport(scenario.getName() + " Completed...");
-        attachScreenshot(getDriver(), scenario.getName());
+        //Update Result for Current Scenario...
+        updateResult(scenario, featureName);
+        attachScreenshotPerConfig(scenario);
     }
 
     @AfterAll
     public static void afterAll() {
+        printResult();
         quitDriver();
         stopAppiumServer();
         String home = System.getProperty("user.dir");

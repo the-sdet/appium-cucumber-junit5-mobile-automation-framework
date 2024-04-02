@@ -4,10 +4,12 @@ import org.openqa.selenium.By;
 import pages.base.FlightsPageBase;
 
 import static gobalconstants.constants.EMPTY_STRING;
+import static io.github.the_sdet.web.Utils.customizeXpath;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class FlightsPageIOS extends FlightsPageBase {
     private final String flightsHeader = EMPTY_STRING;
+    private final String tab = EMPTY_STRING;
     private final String from = EMPTY_STRING;
     private final String fromSelectedCity = EMPTY_STRING;
     private final String fromSelectedCityCode = EMPTY_STRING;
@@ -18,6 +20,7 @@ public class FlightsPageIOS extends FlightsPageBase {
     private final String toSelectedAirport = EMPTY_STRING;
     private final String fromDate = EMPTY_STRING;
     private final String fromDateSelected = EMPTY_STRING;
+    private final String fromDayAndYearSelected = EMPTY_STRING;
     private final String returnDate = EMPTY_STRING;
     private final String returnSelected = EMPTY_STRING;
     private final String travelersAndClass = EMPTY_STRING;
@@ -30,10 +33,19 @@ public class FlightsPageIOS extends FlightsPageBase {
     private final String cityCode = EMPTY_STRING;
     private final String cityName = EMPTY_STRING;
     private final String airportName = EMPTY_STRING;
-
+    private final String backButton = EMPTY_STRING;
     @Override
     public By getFlightsHeader() {
         return By.xpath(flightsHeader);
+    }
+
+    @Override
+    public By getBackButton() {
+        return By.xpath(backButton);
+    }
+    @Override
+    public By getTab(String tabName) {
+        return By.xpath(customizeXpath(tab, tabName));
     }
 
     @Override
@@ -87,6 +99,11 @@ public class FlightsPageIOS extends FlightsPageBase {
     }
 
     @Override
+    public By getFromDayAndYearSelected() {
+        return By.id(fromDayAndYearSelected);
+    }
+
+    @Override
     public By getReturnDate() {
         return By.xpath(returnDate);
     }
@@ -102,7 +119,7 @@ public class FlightsPageIOS extends FlightsPageBase {
     }
 
     @Override
-    public By getTravelerSelected() {
+    public By getTravelerCount() {
         return By.xpath(travelerSelected);
     }
 
