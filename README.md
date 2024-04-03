@@ -106,7 +106,7 @@ There are multiple ways to execute the tests.
 Executing tests using Maven CLI is the preferred option as it's configured in a such a way that, you can almost provide
 most of the configs from maven command itself at the runtime rather than actually modifying them in code.
 
-### Examples of some configs that can be altered from CMD for the specific run
+## Examples of some configs that can be altered from CMD for the specific run
 
 All the below configs are optional. if NOT provided from CMD, already defined values will be picked.
 
@@ -118,6 +118,45 @@ All the below configs are optional. if NOT provided from CMD, already defined va
 * sauce.password
 * screenshot
 * report.name
+
+#### Executing on local or remote (sauce labs)
+```
+mvn clean install -Dexecution.type=local
+```
+```
+mvn clean install -Dexecution.type=remote
+```
+
+#### Screenshot Options
+```
+mvn clean install -Dscreenshot=only.pass
+```
+```
+mvn clean install -Dscreenshot=only.fail
+```
+```
+mvn clean install -Dscreenshot=all
+```
+#### Platform Options
+```
+mvn clean install -Dplatform=android
+```
+```
+mvn clean install -Dplatform=ios
+```
+
+#### Sauce Options
+```
+mvn clean install -Dsauce.url=sauce-url -Dsauce.username=username -Dsauce.password=pasword
+```
+#### Environment
+```
+mvn clean install -Denv=stg
+```
+#### Report Name
+```
+mvn clean install -Dreport.name="Automation Test Summary - The SDET"
+```
 
 ### Executing all the tests
 

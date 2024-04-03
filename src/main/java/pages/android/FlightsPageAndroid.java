@@ -3,25 +3,29 @@ package pages.android;
 import org.openqa.selenium.By;
 import pages.base.FlightsPageBase;
 
+import static io.github.the_sdet.web.Utils.customizeXpath;
+
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class FlightsPageAndroid extends FlightsPageBase {
 
     private final String flightsHeader = "//android.widget.TextView[@resource-id='com.makemytrip:id/tv_header_first' and @text='Flight']";
+    private final String tab = "//android.widget.TextView[@text='v1']";
     private final String from = "com.makemytrip:id/from_selection_layout";
-    private final String fromSelectedCity = "//android.widget.TextView[@resource-id='com.makemytrip:id/from_to_et']//following-sibling::android.widget.TextView[1]";
-    private final String fromSelectedCityCode = "//android.widget.TextView[@resource-id='com.makemytrip:id/from_to_et']//following-sibling::android.widget.TextView[2]";
-    private final String fromSelectedAirport = "//android.widget.TextView[@resource-id='com.makemytrip:id/from_to_et']//following-sibling::android.widget.TextView[3]";
+    private final String fromSelectedCity = "//android.widget.TextView[contains(@resource-id,'from_to_et')]//following-sibling::android.widget.LinearLayout[contains(@resource-id,'from_city_text_layout')]//android.widget.TextView[1]";
+    private final String fromSelectedCityCode = "//android.widget.TextView[contains(@resource-id,'from_to_et')]//following-sibling::android.widget.LinearLayout[contains(@resource-id,'from_city_text_layout')]//android.widget.TextView[2]";
+    private final String fromSelectedAirport = "//android.widget.TextView[@resource-id='com.makemytrip:id/from_to_et']//following-sibling::android.widget.TextView";
     private final String to = "com.makemytrip:id/to_city_layout";
-    private final String toSelectedCity = "//android.widget.TextView[@resource-id='com.makemytrip:id/tv_to_et']//following-sibling::android.widget.TextView[1]";
-    private final String toSelectedCityCode = "//android.widget.TextView[@resource-id='com.makemytrip:id/tv_to_et']//following-sibling::android.widget.TextView[2]";
-    private final String toSelectedAirport = "//android.widget.TextView[@resource-id='com.makemytrip:id/tv_to_et']//following-sibling::android.widget.TextView[3]";
+    private final String toSelectedCity = "//android.widget.TextView[contains(@resource-id,'tv_to_et')]//following-sibling::android.widget.LinearLayout[contains(@resource-id,'to_city_text_layout')]//android.widget.TextView[1]";
+    private final String toSelectedCityCode = "//android.widget.TextView[contains(@resource-id,'tv_to_et')]//following-sibling::android.widget.LinearLayout[contains(@resource-id,'to_city_text_layout')]//android.widget.TextView[2]";
+    private final String toSelectedAirport = "//android.widget.TextView[@resource-id='com.makemytrip:id/tv_to_et']//following-sibling::android.widget.TextView";
     private final String fromDate = "com.makemytrip:id/from_date_layout";
-    private final String fromDateSelected = "com.makemytrip:id/from_date_layout";
+    private final String fromDateSelected = "com.makemytrip:id/tv_from_date";
+    private final String fromDayAndYearSelected = "com.makemytrip:id/tv_from_date_time";
     private final String returnDate = "com.makemytrip:id/to_date_layout";
     private final String returnSelected = "com.makemytrip:id/to_date_layout";
     private final String travelersAndClass = "com.makemytrip:id/traveller_and_cabin_layout";
-    private final String travelerSelected = "com.makemytrip:id/traveller_and_cabin_layout";
-    private final String classSelected = "com.makemytrip:id/traveller_and_cabin_layout";
+    private final String travelerCount = "com.makemytrip:id/tv_traveller_count";
+    private final String classSelected = "com.makemytrip:id/tv_trip_type";
     private final String searchButton = "com.makemytrip:id/search_button_flat";
     private final String departureCity = "//android.widget.TextView[@resource-id='com.makemytrip:id/from_city'] | " +
             "//android.widget.EditText[@resource-id='com.makemytrip:id/departure_city_input']";
@@ -34,10 +38,20 @@ public class FlightsPageAndroid extends FlightsPageBase {
             "//preceding-sibling::android.widget.TextView[@resource-id='com.makemytrip:id/title']";
     private final String airportName = "//android.widget.TextView[@resource-id='com.makemytrip:id/city_code' and @text='BOM']" +
             "//following-sibling::android.widget.TextView[@resource-id='com.makemytrip:id/subtitle']";
-
+    private final String backButton = "//android.widget.ImageButton[@resource-id='com.makemytrip:id/ib_back']";
     @Override
     public By getFlightsHeader() {
         return By.xpath(flightsHeader);
+    }
+
+    @Override
+    public By getBackButton() {
+        return By.xpath(backButton);
+    }
+
+    @Override
+    public By getTab(String tabName) {
+        return By.xpath(customizeXpath(tab, tabName.toUpperCase()));
     }
 
     @Override
@@ -91,6 +105,11 @@ public class FlightsPageAndroid extends FlightsPageBase {
     }
 
     @Override
+    public By getFromDayAndYearSelected() {
+        return By.id(fromDayAndYearSelected);
+    }
+
+    @Override
     public By getReturnDate() {
         return By.id(returnDate);
     }
@@ -106,8 +125,8 @@ public class FlightsPageAndroid extends FlightsPageBase {
     }
 
     @Override
-    public By getTravelerSelected() {
-        return By.id(travelerSelected);
+    public By getTravelerCount() {
+        return By.id(travelerCount);
     }
 
     @Override

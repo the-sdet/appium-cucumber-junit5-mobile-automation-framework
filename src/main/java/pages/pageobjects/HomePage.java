@@ -35,6 +35,15 @@ public class HomePage extends AppiumUtils {
             click(homePage.getLanguageSelectionSkipButton());
     }
 
+    public void goBackToHome() {
+        while (!isHamburgerMenuDisplayed()) {
+            if (isVisible(homePage.getBackButton())) {
+                click(homePage.getBackButton());
+                waitFor(Duration.ofSeconds(1));
+            }
+        }
+    }
+
     public void skipInitialLoginScreen() {
         By nativeCompleteWithPopup = By.xpath("//android.widget.TextView[@resource-id='miuix.stub:id/alertTitle']//..//android.widget.Button[@text='Cancel']");
         if (waitAndCheckIsVisible(nativeCompleteWithPopup, Duration.ofSeconds(5))) {
@@ -49,14 +58,14 @@ public class HomePage extends AppiumUtils {
 
     public void closeLoginPopUp() {
         By loginAlertCloseButton = homePage.getCloseLoginAlert();
-        if (waitAndCheckIsVisible(loginAlertCloseButton, Duration.ofSeconds(5))) {
+        if (waitAndCheckIsVisible(loginAlertCloseButton, Duration.ofSeconds(3))) {
             logToReport("Login Alert is Visible...");
             click(getElement(loginAlertCloseButton));
         } else logToReport("Login Alert is NOT Visible...");
     }
 
     public void closeAdsIfAny() {
-        if (waitAndCheckIsVisible(homePage.getAdBar(), Duration.ZERO)) {
+        if (isVisible(homePage.getAdBar())) {
             logToReport("Ad is Visible...");
             click(homePage.getAdBarCloseButton());
         } else logToReport("Ad is NOT Visible...");
@@ -69,7 +78,7 @@ public class HomePage extends AppiumUtils {
     }
 
     public boolean isHamburgerMenuDisplayed() {
-        return isVisible(homePage.getDrawerButton());
+        return waitAndCheckIsVisible(homePage.getDrawerButton(), Duration.ofSeconds(5));
     }
 
     public boolean isMyCashDisplayed() {
@@ -129,10 +138,26 @@ public class HomePage extends AppiumUtils {
         return isVisible(homePage.getGetSecondaryLobExpand());
     }
 
+    public void handleCta() {
+        if (isVisible(homePage.getCta())) {
+            click(homePage.getCtaClose());
+            waitFor(Duration.ofSeconds(1));
+        }
+    }
+
+    public void handleBottomSheetAd() {
+        By closeButton = homePage.getDismissButton();
+        if (isVisible(closeButton)) {
+            click(closeButton);
+            waitFor(Duration.ofSeconds(1));
+        }
+    }
+
     public void clickOnExpandLobButton() {
-        if (isVisible(homePage.getDismissButton()))
-            click(homePage.getDismissButton());
-        waitFor(Duration.ofSeconds(2));
         click(homePage.getGetSecondaryLobExpand());
+    }
+
+    public void clickOnLob(String lobName) {
+        waitAndClick(homePage.getLobItem(lobName), 5);
     }
 }

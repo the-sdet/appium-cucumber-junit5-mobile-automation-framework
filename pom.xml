@@ -41,9 +41,6 @@
         <sauce.password>dummy_password</sauce.password>
 
         <runner.path>**/TestRunner.class</runner.path>
-        <parallel>false</parallel>
-        <execution>same_thread</execution>
-        <threads>2</threads>
         <screenshot>only.fail</screenshot>
         <report.name>Automation Test Summary - The SDET</report.name>
     </properties>
@@ -202,11 +199,17 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.plugin.version}</version>
                 <configuration>
+                    <!--<rerunFailingTestsCount>1</rerunFailingTestsCount>-->
                     <forkNode implementation="org.apache.maven.plugin.surefire.extensions.SurefireForkNodeFactory"/>
                     <includes>
                         <include>${runner.path}</include>
                     </includes>
                     <testFailureIgnore>false</testFailureIgnore>
+                    <properties>
+                        <configurationParameters>
+                            cucumber.junit-platform.naming-strategy=long
+                        </configurationParameters>
+                    </properties>
                 </configuration>
             </plugin>
 
