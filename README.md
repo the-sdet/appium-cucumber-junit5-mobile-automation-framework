@@ -4,13 +4,16 @@
 <a href="https://www.selenium.dev/"><img align="center" src="src/test/resources/logos/selenium-logo.png" height="40" width="40" alt="Selenium"/></a> &nbsp;
 <a href="https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html"><img align="center" src="src/test/resources/logos/java-logo.svg" height="40" width="40" alt="Java"/></a> &nbsp;
 <a href="https://cucumber.io/"><img align="center" src="src/test/resources/logos/cucumber-logo.svg" height="40" width="40" alt="Cucumber"/></a> &nbsp;
-<a href="https://junit.org/junit5/"><img align="center" src="src/test/resources/logos/junit5-logo.png" height="40" width="40" alt="JUnit5"/></a>
+<a href="https://junit.org/junit5/"><img align="center" src="src/test/resources/logos/junit5-logo.png" height="40" width="40" alt="JUnit5"/></a> &nbsp;
+<a href="https://junit.org/junit5/"><img align="center" src="src/test/resources/logos/mmt-logo.svg" height="40" alt="JUnit5"/></a>
 
 This Mobile Automation Framework, A project ready Test Automation Framework, provides a robust solution for automating tests on both
 Android and iOS devices. With
 seamless integration for great reporting and logging features, it ensures efficient tracking and debugging of test
 executions. The framework supports local execution as well as remote testing via platforms like Sauce Labs, offering
 flexibility and scalability to your automation workflow.
+
+For Instance, this framework contains the Home Page, Menu Drawer, Flight Page, Flight Search, Filter Validations for Search, etc. for **MakeMyTrip** Android App...
 
 ## Tech Stack & Libraries Used
 

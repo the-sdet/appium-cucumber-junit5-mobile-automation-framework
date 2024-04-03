@@ -8,6 +8,11 @@ import pages.pageobjects.MenuPage;
 
 import static engine.Engine.getDriver;
 
+/**
+ * Step Definitions for Flights Page Tests
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
 public class FlightsPageSteps {
     MenuPage menuPage = new MenuPage(getDriver());
     FlightsPage flightsPage = new FlightsPage(getDriver());
@@ -34,7 +39,7 @@ public class FlightsPageSteps {
 
     @Then("Search Flights button should be visible")
     public void searchFlightsButtonShouldBeVisible() {
-        flightsPage.isSearchFlightsButtonDisplayed();
+        Assert.assertTrue(flightsPage.isSearchFlightsButtonDisplayed());
     }
 
     @Then("User closes the Menu Drawer if opened")

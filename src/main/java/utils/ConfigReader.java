@@ -5,7 +5,16 @@ import lombok.Getter;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Utility class to read configuration properties.
+ * It loads properties from files: config.properties, android-config.properties, ios-config.properties.
+ * Provides methods to access specific properties.
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
+@SuppressWarnings("unused")
 public class ConfigReader {
+
     @Getter
     static Properties properties, androidProperties, iosProperties;
 
@@ -22,6 +31,13 @@ public class ConfigReader {
         }
     }
 
+    /**
+     * Get the value of a property from a specified configuration file.
+     *
+     * @param configFileName The name of the configuration file.
+     * @param propertyName   The name of the property.
+     * @return The value of the property.
+     */
     public static String getProperty(String configFileName, String propertyName) {
         Properties properties = new Properties();
         try {
@@ -31,5 +47,4 @@ public class ConfigReader {
         }
         return properties.getProperty(propertyName);
     }
-
 }

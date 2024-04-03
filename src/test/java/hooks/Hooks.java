@@ -12,16 +12,34 @@ import static utils.CommonUtils.attachScreenshotPerConfig;
 import static utils.CommonUtils.getFeatureNameFromScenario;
 import static utils.ResultManager.*;
 
+
+/**
+ * Hooks class containing setup and tear-down methods for test scenarios.
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
 @SuppressWarnings("unused")
 public class Hooks {
+
     static String featureName;
     static HashSet<String> features = new HashSet<>();
 
+    /**
+     * Method executed before all tests.
+     *
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     @BeforeAll
     public static void beforeAll() {
         initializeDriver();
     }
 
+    /**
+     * Method executed before each test.
+     *
+     * @param scenario The scenario being executed.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     @Before
     public void beforeTest(Scenario scenario) {
         String currentFeatureName = getFeatureNameFromScenario(scenario, false);
@@ -29,20 +47,31 @@ public class Hooks {
             featureName = currentFeatureName;
             features.add(featureName);
 
-            //Initialize Result Map for Current Feature...
+            // Initialize Result Map for Current Feature
             initializeResultCollector(featureName);
         }
         setCurrentScenario(scenario);
         logToReport(scenario.getName() + " Started...");
     }
 
+    /**
+     * Method executed after each test.
+     *
+     * @param scenario The scenario being executed.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     @After
     public void afterTest(Scenario scenario) {
-        //Update Result for Current Scenario...
+        // Update Result for Current Scenario
         updateResult(scenario, featureName);
         attachScreenshotPerConfig(scenario);
     }
 
+    /**
+     * Method executed after all tests.
+     *
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     @AfterAll
     public static void afterAll() {
         printResult();

@@ -2,6 +2,12 @@ package pages.base;
 
 import org.openqa.selenium.By;
 
+/**
+ * Class to maintain abstract methods for of Flights page Elements,
+ * so that Android and IOS both have the same methods
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public abstract class FlightsPageBase {
     public abstract By getFlightsHeader();
