@@ -5,7 +5,11 @@ import pages.base.FlightsPageBase;
 
 import static gobalconstants.constants.EMPTY_STRING;
 import static io.github.the_sdet.web.Utils.customizeXpath;
-
+/**
+ * Class to maintain elements of Flights page for IOS
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class FlightsPageIOS extends FlightsPageBase {
     private final String flightsHeader = EMPTY_STRING;

@@ -5,6 +5,11 @@ import pages.base.FlightsPageBase;
 
 import static io.github.the_sdet.web.Utils.customizeXpath;
 
+/**
+ * Class to maintain elements of Flights page for Android
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class FlightsPageAndroid extends FlightsPageBase {
 
@@ -39,6 +44,7 @@ public class FlightsPageAndroid extends FlightsPageBase {
     private final String airportName = "//android.widget.TextView[@resource-id='com.makemytrip:id/city_code' and @text='BOM']" +
             "//following-sibling::android.widget.TextView[@resource-id='com.makemytrip:id/subtitle']";
     private final String backButton = "//android.widget.ImageButton[@resource-id='com.makemytrip:id/ib_back']";
+
     @Override
     public By getFlightsHeader() {
         return By.xpath(flightsHeader);

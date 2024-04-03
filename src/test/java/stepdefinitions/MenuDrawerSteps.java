@@ -11,6 +11,11 @@ import java.util.List;
 import static engine.Engine.getDriver;
 import static io.github.the_sdet.cucumber.CucumberUtils.logToReport;
 
+/**
+ * Step Definitions for Menu Drawer Tests
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
 public class MenuDrawerSteps {
     MenuPage menuPage = new MenuPage(getDriver());
 

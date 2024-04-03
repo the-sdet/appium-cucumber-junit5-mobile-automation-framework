@@ -5,7 +5,11 @@ import pages.base.HomePageBase;
 
 import static gobalconstants.constants.EMPTY_STRING;
 import static io.github.the_sdet.web.Utils.customizeXpath;
-
+/**
+ * Class to maintain elements of Home page for IOS
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class HomePageIOS extends HomePageBase {
     private final String selectYourLanguageLabel = EMPTY_STRING;

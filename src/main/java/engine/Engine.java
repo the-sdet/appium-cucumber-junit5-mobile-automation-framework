@@ -18,6 +18,11 @@ import java.util.Properties;
 import static io.github.the_sdet.common.CommonUtils.waitFor;
 import static utils.ConfigReader.*;
 
+/**
+ * Class to handle Appium Driver Initialization, termination and other driver management utils.
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
 @SuppressWarnings("unused")
 public class Engine {
     static ThreadLocal<AppiumDriver> tlDriver = new ThreadLocal<>();
@@ -26,10 +31,22 @@ public class Engine {
     private static final String appPackage = isAndroid() ?
             getAndroidProperties().getProperty("app.package") : getIosProperties().getProperty("app.package");
 
+    /**
+     * Check if the platform is Android.
+     *
+     * @return true if platform is Android, false otherwise.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     public static boolean isAndroid() {
         return platform.equals("android");
     }
 
+    /**
+     * Start the Appium server.
+     *
+     * @return URL of the started Appium server.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     public static URL startAppiumServer() {
         AppiumServiceBuilder builder = new AppiumServiceBuilder()
                 .withIPAddress(getProperties().getProperty("appium.server.url.local"))
@@ -44,6 +61,11 @@ public class Engine {
         return appiumserverUrl;
     }
 
+    /**
+     * Stop the Appium server if it is running.
+     *
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     public static void stopAppiumServer() {
         if (service != null && service.isRunning()) {
             service.stop();
@@ -51,6 +73,11 @@ public class Engine {
         }
     }
 
+    /**
+     * Initialize the Appium driver based on the platform and execution type.
+     *
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     public static void initializeDriver() {
         Properties properties = getProperties();
         AppiumDriver driver;
@@ -75,10 +102,24 @@ public class Engine {
         tlDriver.set(driver);
     }
 
+    /**
+     * Get the current Appium driver.
+     *
+     * @return the current Appium driver.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     public static AppiumDriver getDriver() {
         return tlDriver.get();
     }
 
+    /**
+     * Quit the current Appium driver if it is not null.
+     * Terminates the app associated with the driver.
+     * Waits for a short duration before quitting the driver.
+     * Logs information when the app is terminated and driver is quit.
+     *
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     public static void quitDriver() {
         AppiumDriver driver = tlDriver.get();
         if (driver != null) {
@@ -94,6 +135,12 @@ public class Engine {
         }
     }
 
+    /**
+     * Activate the app associated with the current driver.
+     * Logs information when the app is activated.
+     *
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     public static void activateApp() {
         if (isAndroid()) {
             ((AndroidDriver) getDriver()).activateApp(appPackage);
@@ -105,6 +152,11 @@ public class Engine {
         Log.info("App Activated...");
     }
 
+    /**
+     * Relaunch the app associated with the current driver.
+     *
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     public static void relaunchApp() {
         if (isAndroid()) {
             try {
@@ -124,6 +176,13 @@ public class Engine {
         }
     }
 
+    /**
+     * Frame a URL from the provided string.
+     *
+     * @param url the string representation of the URL.
+     * @return the URL object parsed from the string.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     private static URL frameUrl(String url) {
         try {
             return new URL(url);
@@ -133,6 +192,12 @@ public class Engine {
         }
     }
 
+    /**
+     * Get Android desired capabilities.
+     *
+     * @return DesiredCapabilities object for Android.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     private static DesiredCapabilities getAndroidDesiredCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         Properties androidProperties = getAndroidProperties();
@@ -153,6 +218,12 @@ public class Engine {
         return capabilities;
     }
 
+    /**
+     * Get iOS desired capabilities.
+     *
+     * @return DesiredCapabilities object for iOS.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     private static DesiredCapabilities getIosDesiredCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         Properties iosProperties = getIosProperties();
@@ -173,6 +244,12 @@ public class Engine {
         return capabilities;
     }
 
+    /**
+     * Get Android remote desired capabilities.
+     *
+     * @return MutableCapabilities object for Android remote execution.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     private static MutableCapabilities getAndroidRemoteDesiredCapabilities() {
         Properties androidProperties = getAndroidProperties();
         MutableCapabilities caps = new MutableCapabilities();
@@ -185,6 +262,12 @@ public class Engine {
         return caps;
     }
 
+    /**
+     * Get iOS remote desired capabilities.
+     *
+     * @return MutableCapabilities object for iOS remote execution.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     private static MutableCapabilities getIosRemoteDesiredCapabilities() {
         Properties iosProperties = getIosProperties();
         MutableCapabilities caps = new MutableCapabilities();
@@ -197,6 +280,12 @@ public class Engine {
         return caps;
     }
 
+    /**
+     * Get Sauce Labs options.
+     *
+     * @return MutableCapabilities object for Sauce Labs options.
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
     private static MutableCapabilities getSauceOptions() {
         Properties properties = getProperties();
         MutableCapabilities sauceOptions = new MutableCapabilities();

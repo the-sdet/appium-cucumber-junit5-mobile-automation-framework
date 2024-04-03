@@ -5,6 +5,11 @@ import pages.base.HomePageBase;
 
 import static io.github.the_sdet.web.Utils.customizeXpath;
 
+/**
+ * Class to maintain elements of Home page for Android
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class HomePageAndroid extends HomePageBase {
     private final String selectYourLanguageLabel = "//android.widget.TextView[@text='Select your Language']";

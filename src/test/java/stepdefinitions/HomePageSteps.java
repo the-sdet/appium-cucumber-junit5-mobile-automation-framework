@@ -9,6 +9,11 @@ import pages.pageobjects.HomePage;
 
 import static engine.Engine.getDriver;
 
+/**
+ * Step Definitions for Home Page Tests
+ *
+ * @author Pabitra Swain (contact.the.sdet@gmail.com)
+ */
 public class HomePageSteps {
     HomePage homePage = new HomePage(getDriver());
 
