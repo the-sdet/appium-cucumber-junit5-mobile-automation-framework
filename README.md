@@ -50,11 +50,18 @@ For Instance, this framework contains the Home Page, Menu Drawer, Flight Page, F
 
 ## Setup:
 
-### Install below items for an easy setup
+### Install the below items for an easy setup
 
 * [Java 11](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html)
 * [Maven](https://maven.apache.org/download.cgi)
 * [Any IDE (IntelliJ)](https://www.jetbrains.com/idea/download/)
+* [Node.js (Needed to Manage Appium)](https://nodejs.org/en/download)
+* Install Appium
+  * ``` npm i --location=global appium ```
+  * ``` appium --version ```
+* Install Driver
+  * Android Driver: ``` appium driver install uiautomator2 ```
+  * iOS Driver: ``` appium driver install xcuitest ```
 
 ### Clone the repository:
 
