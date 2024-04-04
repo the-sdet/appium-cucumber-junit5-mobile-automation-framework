@@ -209,9 +209,9 @@ operator precedence.
 </colgroup>
 <thead>
 <tr>
-<th>Operator</th>
-<th>Meaning</th>
-<th>Associativity</th>
+<th align="left">Operator</th>
+<th align="left">Meaning</th>
+<th align="left">Associativity</th>
 </tr>
 </thead>
 <tbody>
@@ -244,8 +244,8 @@ following tag expressions can be useful.
 </colgroup>
 <thead>
 <tr>
-<th>Tag Expression</th>
-<th>Selection</th>
+<th align="left">Tag Expression</th>
+<th align="left">Selection</th>
 </tr>
 </thead>
 <tbody>
