@@ -11,7 +11,7 @@ import java.time.Duration;
 import static engine.Engine.isAndroid;
 import static gobalconstants.constants.APP_DATE_FORMAT;
 import static gobalconstants.constants.PREFERRED_DATE_FORMAT;
-import static utils.CommonUtils.formatDate;
+import static io.github.the_sdet.common.CommonUtils.formatDate;
 
 /**
  * Page Object class for Flights page to have modular methods to handle element interactions
