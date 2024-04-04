@@ -38,20 +38,6 @@ public class CommonUtils {
     }
 
     /**
-     * Enum representing the status of a test scenario.
-     *
-     * @author Pabitra Swain (contact.the.sdet@gmail.com)
-     */
-    public enum STATUS {
-        PASS("PASS"), FAIL("FAIL");
-        public final String status;
-
-        STATUS(String status) {
-            this.status = status;
-        }
-    }
-
-    /**
      * Attaches screenshot to the Cucumber report based on the configuration.
      *
      * @param scenario The Scenario object from Cucumber.
@@ -72,27 +58,6 @@ public class CommonUtils {
         } else {
             Log.info("Taking Screenshot.");
             attachScreenshot(getDriver());
-        }
-    }
-
-    /**
-     * Format a date string from one format to another.
-     *
-     * @param inputDateStr     The input date string.
-     * @param inputDateFormat  The input date format.
-     * @param outputDateFormat The output date format.
-     * @return the formatted date string.
-     * @author Pabitra Swain (contact.the.sdet@gmail.com)
-     */
-    public static String formatDate(String inputDateStr, String inputDateFormat, String outputDateFormat) {
-        DateFormat inputFormatter = new SimpleDateFormat(inputDateFormat);
-        DateFormat outputFormatter = new SimpleDateFormat(outputDateFormat);
-        try {
-            Date inputDate = inputFormatter.parse(inputDateStr);
-            return outputFormatter.format(inputDate);
-        } catch (ParseException e) {
-            Log.error("Parse Exception...", e);
-            return null;
         }
     }
 }

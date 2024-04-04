@@ -1,6 +1,7 @@
 package utils;
 
 import io.cucumber.java.Scenario;
+import io.github.the_sdet.common.CommonUtils.STATUS;
 import logger.Log;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.Map;
  */
 public class ResultManager {
 
-    static HashMap<String, Map<CommonUtils.STATUS, Integer>> resultCollector = new HashMap<>();
+    static HashMap<String, Map<STATUS, Integer>> resultCollector = new HashMap<>();
 
     /**
      * Initializes the result collector for a given feature.
@@ -23,9 +24,9 @@ public class ResultManager {
      * @author Pabitra Swain (contact.the.sdet@gmail.com)
      */
     public static void initializeResultCollector(String featureName) {
-        HashMap<CommonUtils.STATUS, Integer> resultInitializer = new HashMap<>();
-        resultInitializer.put(CommonUtils.STATUS.PASS, 0);
-        resultInitializer.put(CommonUtils.STATUS.FAIL, 0);
+        HashMap<STATUS, Integer> resultInitializer = new HashMap<>();
+        resultInitializer.put(STATUS.PASS, 0);
+        resultInitializer.put(STATUS.FAIL, 0);
         resultCollector.put(featureName, resultInitializer);
     }
 
@@ -35,10 +36,10 @@ public class ResultManager {
      * @author Pabitra Swain (contact.the.sdet@gmail.com)
      */
     public static void printResult() {
-        for (Map.Entry<String, Map<CommonUtils.STATUS, Integer>> entry : resultCollector.entrySet()) {
+        for (Map.Entry<String, Map<STATUS, Integer>> entry : resultCollector.entrySet()) {
             String feature = entry.getKey();
-            int pass = entry.getValue().get(CommonUtils.STATUS.PASS);
-            int fail = entry.getValue().get(CommonUtils.STATUS.FAIL);
+            int pass = entry.getValue().get(STATUS.PASS);
+            int fail = entry.getValue().get(STATUS.FAIL);
             Log.info(String.format("Feature: %s | Pass: %d | Fail: %d", feature, pass, fail));
         }
     }
@@ -51,11 +52,11 @@ public class ResultManager {
      * @author Pabitra Swain (contact.the.sdet@gmail.com)
      */
     public static void updateResult(Scenario scenario, String featureName) {
-        Map<CommonUtils.STATUS, Integer> resultKey = resultCollector.get(featureName);
+        Map<STATUS, Integer> resultKey = resultCollector.get(featureName);
         if (scenario.isFailed()) {
-            resultKey.put(CommonUtils.STATUS.FAIL, (resultKey.get(CommonUtils.STATUS.FAIL) + 1));
+            resultKey.put(STATUS.FAIL, (resultKey.get(STATUS.FAIL) + 1));
         } else {
-            resultKey.put(CommonUtils.STATUS.PASS, (resultKey.get(CommonUtils.STATUS.PASS) + 1));
+            resultKey.put(STATUS.PASS, (resultKey.get(STATUS.PASS) + 1));
         }
     }
 }

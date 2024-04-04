@@ -5,7 +5,7 @@
 <a href="https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html"><img align="center" src="src/test/resources/logos/java-logo.svg" height="40" width="40" alt="Java"/></a> &nbsp;
 <a href="https://cucumber.io/"><img align="center" src="src/test/resources/logos/cucumber-logo.svg" height="40" width="40" alt="Cucumber"/></a> &nbsp;
 <a href="https://junit.org/junit5/"><img align="center" src="src/test/resources/logos/junit5-logo.png" height="40" width="40" alt="JUnit5"/></a> &nbsp;
-<a href="https://junit.org/junit5/"><img align="center" src="src/test/resources/logos/mmt-logo.svg" height="40" alt="JUnit5"/></a>
+<a href="https://www.makemytrip.com/"><img align="center" src="src/test/resources/logos/mmt-logo.svg" height="40" alt="MakeMyTrip"/></a>
 
 This Mobile Automation Framework, A project ready Test Automation Framework, provides a robust solution for automating tests on both
 Android and iOS devices. With
@@ -22,7 +22,7 @@ For Instance, this framework contains the Home Page, Menu Drawer, Flight Page, F
 * java v11
 * cucumber v7.15.0
 * junit 5
-* test-automation-toolkit v1.0.1
+* test-automation-toolkit v1.0.2
 * maven v3.9.5
 * surefire v3.1.2
 * gherkin v26.0.1
@@ -66,7 +66,7 @@ For Instance, this framework contains the Home Page, Menu Drawer, Flight Page, F
 ### Clone the repository:
 
 ```
-git clone https://github.com/the-sdet/cucumber-junit5-mobile-automation-framework.git
+git clone https://github.com/the-sdet/appium-cucumber-junit5-mobile-automation-framework.git
 ```
 
 ## Configuration:
