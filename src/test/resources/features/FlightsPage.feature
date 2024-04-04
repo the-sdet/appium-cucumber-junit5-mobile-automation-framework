@@ -1,12 +1,12 @@
 #Author: Pabitra Swain (contact.the.sdet@gmail.com)
 @flights
-Feature: MakeMyTrip Flights Page Tests
+Feature: Flights Search
 
   Background: User is on MakeMyTrip Home Page
     Given User skips language selection and login screen
     And User closes Login Popup and Ads if any
 
-  Scenario: Verify Flights Page
+  Scenario: Flights Page - UI Elements
     Then User closes the Menu Drawer if opened
     Then User clicks on LOB "Flights"
     Then Flights page should be opened

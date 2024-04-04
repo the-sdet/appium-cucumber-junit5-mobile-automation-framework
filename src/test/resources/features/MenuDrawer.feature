@@ -1,18 +1,18 @@
 #Author: Pabitra Swain (contact.the.sdet@gmail.com)
 @drawer @menu
-Feature: MakeMyTrip Menu Drawer Tests
+Feature: Menu Drawer
 
   Background: User is on MakeMyTrip Home Page
     Given User skips language selection and login screen
     And User closes Login Popup and Ads if any
 
-  Scenario: Hamburger Menu Function Validations
+  Scenario: Hamburger Menu Function
     And User clicks on the Hamburger Menu Icon
     Then App Drawer should be opened
     And User swipes left on App Drawer
     Then App Drawer should closed
 
-  Scenario: Hamburger Menu Items Validations
+  Scenario: Hamburger Menu Items
     And User clicks on the Hamburger Menu Icon
     Then App Drawer should be opened
     And Login and Signup Now Should be displayed
