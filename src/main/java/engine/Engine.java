@@ -28,6 +28,7 @@ public class Engine {
     static ThreadLocal<AppiumDriver> tlDriver = new ThreadLocal<>();
     private static AppiumDriverLocalService service;
     private static final String platform = getProperties().getProperty("platform").trim().toLowerCase();
+    private static final String executionType = getProperties().getProperty("execution.type").toLowerCase();
     private static final String appPackage = isAndroid() ?
             getAndroidProperties().getProperty("app.package") : getIosProperties().getProperty("app.package");
 
@@ -39,6 +40,16 @@ public class Engine {
      */
     public static boolean isAndroid() {
         return platform.equals("android");
+    }
+
+    /**
+     * Check if the execution is to be done on local
+     *
+     * @return true if local execution, false otherwise
+     * @author Pabitra Swain (contact.the.sdet@gmail.com)
+     */
+    public static boolean isLocal() {
+        return executionType.equals("local");
     }
 
     /**
@@ -83,17 +94,16 @@ public class Engine {
         AppiumDriver driver;
         String executionType = properties.getProperty("execution.type");
 
-        URL appiumServerURL = executionType.equalsIgnoreCase("local") ?
-                startAppiumServer() : frameUrl(properties.getProperty("appium.server.url.remote"));
+        URL appiumServerURL = isLocal() ? startAppiumServer() : frameUrl(properties.getProperty("appium.server.url.remote"));
 
         assert appiumServerURL != null;
 
         if (isAndroid()) {
-            driver = executionType.equalsIgnoreCase("local") ?
+            driver = isLocal() ?
                     new AndroidDriver(appiumServerURL, getAndroidDesiredCapabilities()) :
                     new AndroidDriver(appiumServerURL, getAndroidRemoteDesiredCapabilities());
         } else {
-            driver = executionType.equalsIgnoreCase("local") ?
+            driver = isLocal() ?
                     new AndroidDriver(appiumServerURL, getIosDesiredCapabilities()) :
                     new AndroidDriver(appiumServerURL, getIosRemoteDesiredCapabilities());
         }
@@ -209,8 +219,15 @@ public class Engine {
         capabilities.setCapability("appActivity", androidProperties.getProperty("app.activity"));
         capabilities.setCapability("app", androidProperties.getProperty("app"));
         capabilities.setCapability("noReset", Boolean.parseBoolean(androidProperties.getProperty("no.reset"))); // Do not reset app state before this session
+        capabilities.setCapability("unicodeKeyboard", Boolean.parseBoolean(androidProperties.getProperty("unicode.keyboard")));
+        capabilities.setCapability("resetKeyboard", Boolean.parseBoolean(androidProperties.getProperty("hide.keyboard")));
+        capabilities.setCapability("sessionCreationRetry", androidProperties.getProperty("session.creation.retry"));
+        capabilities.setCapability("sessionCreationTimeout", androidProperties.getProperty("session.creation.timeout"));
+        capabilities.setCapability("appWaitDuration", androidProperties.getProperty("app.wait.timeout"));
+        capabilities.setCapability("newCommandTimeout", androidProperties.getProperty("new.command.timeout"));
         capabilities.setCapability("autoGrantPermissions", Boolean.parseBoolean(androidProperties.getProperty("auto.grant.permissions"))); // Automatically grant permissions
         capabilities.setCapability("autoAcceptAlerts", Boolean.parseBoolean(androidProperties.getProperty("auto.accept.alerts"))); // Automatically accept alerts
+        capabilities.setCapability("locationServicesAuthorized", Boolean.parseBoolean(androidProperties.getProperty("location.services")));
         capabilities.setCapability("disableWindowAnimation", Boolean.parseBoolean(androidProperties.getProperty("disable.window.animation"))); // Disable window animations for faster testing
         capabilities.setCapability("disableAndroidWatchers", Boolean.parseBoolean(androidProperties.getProperty("disable.android.watchers"))); // Disable Android system event watchers
         capabilities.setCapability("ignoreUnimportantViews", Boolean.parseBoolean(androidProperties.getProperty("ignore.unimportant.views"))); // Ignore unimportant views to improve speed
@@ -235,8 +252,15 @@ public class Engine {
         capabilities.setCapability("appActivity", iosProperties.getProperty("app.activity"));
         capabilities.setCapability("app", iosProperties.getProperty("app"));
         capabilities.setCapability("noReset", Boolean.parseBoolean(iosProperties.getProperty("no.reset"))); // Do not reset app state before this session
+        capabilities.setCapability("unicodeKeyboard", Boolean.parseBoolean(iosProperties.getProperty("unicode.keyboard")));
+        capabilities.setCapability("resetKeyboard", Boolean.parseBoolean(iosProperties.getProperty("hide.keyboard")));
+        capabilities.setCapability("sessionCreationRetry", iosProperties.getProperty("session.creation.retry"));
+        capabilities.setCapability("sessionCreationTimeout", iosProperties.getProperty("session.creation.timeout"));
+        capabilities.setCapability("appWaitDuration", iosProperties.getProperty("app.wait.timeout"));
+        capabilities.setCapability("newCommandTimeout", iosProperties.getProperty("new.command.timeout"));
         capabilities.setCapability("autoGrantPermissions", Boolean.parseBoolean(iosProperties.getProperty("auto.grant.permissions"))); // Automatically grant permissions
         capabilities.setCapability("autoAcceptAlerts", Boolean.parseBoolean(iosProperties.getProperty("auto.accept.alerts"))); // Automatically accept alerts
+        capabilities.setCapability("locationServicesAuthorized", Boolean.parseBoolean(iosProperties.getProperty("location.services")));
         capabilities.setCapability("disableWindowAnimation", Boolean.parseBoolean(iosProperties.getProperty("disable.window.animation"))); // Disable window animations for faster testing
         capabilities.setCapability("disableAndroidWatchers", Boolean.parseBoolean(iosProperties.getProperty("disable.android.watchers"))); // Disable Android system event watchers
         capabilities.setCapability("ignoreUnimportantViews", Boolean.parseBoolean(iosProperties.getProperty("ignore.unimportant.views"))); // Ignore unimportant views to improve speed
@@ -254,10 +278,24 @@ public class Engine {
         Properties androidProperties = getAndroidProperties();
         MutableCapabilities caps = new MutableCapabilities();
         caps.setCapability("platformName", getProperties().getProperty("platform"));
-        caps.setCapability("app", "storage:filename=" + androidProperties.getProperty("app.name"));
-        caps.setCapability("deviceName", androidProperties.getProperty("device.name"));
-        caps.setCapability("platformVersion", androidProperties.getProperty("platform.version"));
+        String appName = androidProperties.getProperty("app.name");
+        String appValue = appName.contains("apk") ? "storage:filename=" + appName : "storage:" + appName;
+        caps.setCapability("app", appValue); // The filename of the mobile app
+        caps.setCapability("deviceName", androidProperties.getProperty("sauce.device.name"));
+        caps.setCapability("platformVersion", androidProperties.getProperty("sauce.platform.version"));
         caps.setCapability("automationName", "uiAutomator2");
+        caps.setCapability("unicodeKeyboard", Boolean.parseBoolean(androidProperties.getProperty("unicode.keyboard")));
+        caps.setCapability("resetKeyboard", Boolean.parseBoolean(androidProperties.getProperty("hide.keyboard")));
+        caps.setCapability("sessionCreationRetry", androidProperties.getProperty("session.creation.retry"));
+        caps.setCapability("sessionCreationTimeout", androidProperties.getProperty("session.creation.timeout"));
+        caps.setCapability("appWaitDuration", androidProperties.getProperty("app.wait.timeout"));
+        caps.setCapability("newCommandTimeout", androidProperties.getProperty("new.command.timeout"));
+        caps.setCapability("sauceLabsImageInjectionEnabled", true);
+        caps.setCapability("--session-override", true);
+        caps.setCapability("autoGrantPermissions", Boolean.parseBoolean(androidProperties.getProperty("auto.grant.permissions")));
+        caps.setCapability("androidDeviceReadyTimeout", androidProperties.getProperty("device.ready.timeout"));
+        caps.setCapability("avdLaunchTimeout", androidProperties.getProperty("avd.launch.timeout"));
+        caps.setCapability("avdReadyTimeout", androidProperties.getProperty("avd.launch.timeout"));
         caps.setCapability("sauce:options", getSauceOptions());
         return caps;
     }
@@ -272,10 +310,25 @@ public class Engine {
         Properties iosProperties = getIosProperties();
         MutableCapabilities caps = new MutableCapabilities();
         caps.setCapability("platformName", getProperties().getProperty("platform"));
-        caps.setCapability("app", "storage:filename=" + iosProperties.getProperty("app.name"));  // The filename of the mobile app
-        caps.setCapability("deviceName", iosProperties.getProperty("device.name"));
-        caps.setCapability("platformVersion", iosProperties.getProperty("platform.version"));
+        String appName = iosProperties.getProperty("app.name");
+        String appValue = appName.contains("apk") ? "storage:filename=" + appName : "storage:" + appName;
+        caps.setCapability("app", appValue);
+        caps.setCapability("app", appValue); // The filename of the mobile app
+        caps.setCapability("deviceName", iosProperties.getProperty("sauce.device.name"));
+        caps.setCapability("platformVersion", iosProperties.getProperty("sauce.platform.version"));
         caps.setCapability("automationName", "xcuitest");
+        caps.setCapability("unicodeKeyboard", Boolean.parseBoolean(iosProperties.getProperty("unicode.keyboard")));
+        caps.setCapability("resetKeyboard", Boolean.parseBoolean(iosProperties.getProperty("hide.keyboard")));
+        caps.setCapability("sessionCreationRetry", iosProperties.getProperty("session.creation.retry"));
+        caps.setCapability("sessionCreationTimeout", iosProperties.getProperty("session.creation.timeout"));
+        caps.setCapability("appWaitDuration", iosProperties.getProperty("app.wait.timeout"));
+        caps.setCapability("newCommandTimeout", iosProperties.getProperty("new.command.timeout"));
+        caps.setCapability("sauceLabsImageInjectionEnabled", true);
+        caps.setCapability("--session-override", true);
+        caps.setCapability("autoGrantPermissions", Boolean.parseBoolean(iosProperties.getProperty("auto.grant.permissions")));
+        caps.setCapability("androidDeviceReadyTimeout", iosProperties.getProperty("device.ready.timeout"));
+        caps.setCapability("avdLaunchTimeout", iosProperties.getProperty("avd.launch.timeout"));
+        caps.setCapability("avdReadyTimeout", iosProperties.getProperty("avd.launch.timeout"));
         caps.setCapability("sauce:options", getSauceOptions());
         return caps;
     }
@@ -289,10 +342,14 @@ public class Engine {
     private static MutableCapabilities getSauceOptions() {
         Properties properties = getProperties();
         MutableCapabilities sauceOptions = new MutableCapabilities();
-        sauceOptions.setCapability("username", properties.getProperty("sauce.labs.username"));
-        sauceOptions.setCapability("accessKey", properties.getProperty("sauce.labs.access.key"));
-        sauceOptions.setCapability("build", properties.getProperty("sauce.labs.build"));
-        sauceOptions.setCapability("name", properties.getProperty("sauce.labs.name"));
+        //sauceOptions.setCapability("username", properties.getProperty("sauce.labs.username"));
+        //sauceOptions.setCapability("accessKey", properties.getProperty("sauce.labs.access.key"));
+
+        //sauceOptions.setCapability("build", properties.getProperty("sauce.labs.build"));
+        sauceOptions.setCapability("build", properties.getProperty("app.under.test")+" v" + properties.getProperty("app.version"));
+
+        sauceOptions.setCapability("name", properties.getProperty("sauce.labs.test.name"));
+
         sauceOptions.setCapability("deviceOrientation", properties.getProperty("sauce.labs.device.orientation"));
         return sauceOptions;
     }

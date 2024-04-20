@@ -17,7 +17,7 @@
         <selenium.version>4.18.1</selenium.version>
         <appium.version>9.1.0</appium.version>
         <cucumber.version>7.15.0</cucumber.version>
-        <test.automation.toolkit.version>1.0.2</test.automation.toolkit.version>
+        <test.automation.toolkit.version>1.0.3</test.automation.toolkit.version>
         <guava.version>33.0.0-jre</guava.version>
         <junit.platform.suite.version>1.9.2</junit.platform.suite.version>
         <surefire.plugin.version>3.1.2</surefire.plugin.version>
