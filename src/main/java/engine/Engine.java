@@ -43,9 +43,9 @@ public class Engine {
     }
 
     /**
-     * Check if the platform is Android.
+     * Check if the execution is to be done on local
      *
-     * @return true if platform is Android, false otherwise.
+     * @return true if local execution, false otherwise
      * @author Pabitra Swain (contact.the.sdet@gmail.com)
      */
     public static boolean isLocal() {
