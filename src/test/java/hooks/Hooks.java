@@ -6,10 +6,8 @@ import logger.Log;
 import java.util.HashSet;
 
 import static engine.Engine.*;
-import static io.github.the_sdet.cucumber.CucumberUtils.logToReport;
-import static io.github.the_sdet.cucumber.CucumberUtils.setCurrentScenario;
+import static io.github.the_sdet.cucumber.CucumberUtils.*;
 import static utils.CommonUtils.attachScreenshotPerConfig;
-import static utils.CommonUtils.getFeatureNameFromScenario;
 import static utils.ResultManager.*;
 
 
