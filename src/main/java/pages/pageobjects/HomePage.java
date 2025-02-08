@@ -300,6 +300,6 @@ public class HomePage extends AppiumUtils {
      * @author Pabitra Swain (contact.the.sdet@gmail.com)
      */
     public void clickOnLob(String lobName) {
-        waitAndClick(homePage.getLobItem(lobName), 5);
+        waitAndClick(homePage.getLobItem(lobName), Duration.ofSeconds(5));
     }
 }
